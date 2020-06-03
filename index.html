@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome to Medify</title>
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="../css/map.css">
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,700" rel="stylesheet" />
+    <link href="//db.onlinewebfonts.com/c/ef6bdf5ef216552c7e9869841e891ca0?family=Arial+Rounded+MT+Bold" rel="stylesheet" type="text/css" />
+
+    <!-- CDN / LIBRARIES -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- MAPS -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB163NVoJh5OJ05szB3ARsT4hvSwJAywQ"></script>
+</head>
+
+<body>
+    <div id="loaderPage">
+        <div class="logo text-center">
+            <span>medify</span>
+        </div>
+        <div class="loader-frame text-center">
+            <div class="loader1" id="loader1"></div>
+            <div class="loader2" id="loader2"></div>
+        </div>
+        <div class="slogan text-center">
+            <span>Take care of YOU</span>
+        </div>
+    </div>
+
+    <div id="callDoctor" style="display: none;">
+        <div class="container">
+            <div class="row panel">
+                <div class="col-md-4 bg_blur ">
+                    <a href="#" id="callBtt" onclick="" class="follow_btn hidden-xs">Call</a>
+                </div>
+                <div class="col-md-8  col-xs-12 bgDoc">
+                    <img id="docImg" src="" class="img-thumbnail picture hidden-xs" />
+                    <div class="headerProfile">
+                        <h1 id="docName"></h1>
+                        <h4 id="docSpecialty"></h4>
+                        <span id="docBio"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#">medify</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
+          <span class="navbar-toggler-icon">
+            <i class="fas fa-bars" style="color:#fff; font-size:30px;"></i>
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/content/map.html">Find a doctor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/content/about.html">About us</a>
+                </li>
+            </ul>
+            <span class="nav-slogan">Take care of you</span>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle profile-nav" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                  Username
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/content/profile.html">Profile</a>
+                    <a class="dropdown-item" onclick='document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";' href="/content/login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="row" style="margin-top: 60px;">
+        <div class="col-3 form">
+            <div class="form-group">
+                <h2>Little help?</h2>
+                <div class="input-group mb-3">
+                    <input type="text" id="input-dstny" class="form-control" placeholder="Your Address">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Your Location"><i class="far fa-compass"></i></button>
+                    </div>
+                </div>
+            </div>
+            <select class="custom-select form-control" id="combo"> 
+                <option value="" hidden>Choose your profissional</option>               
+                <option value="dentist">Dentist</option>
+                <option value="ortopedista">Ortopedista</option>
+                <option value="pediatra">Pediatra</option>                            
+            </select>
+            <div class="button-form mb-4">
+                <button class="btn-destiny">Ask for a medic</button>
+            </div>
+            <h3>Query History</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Specialty</th>
+                        <th scope="col">Call</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td><button class="btn">Call</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td><button class="btn">Call</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td><button class="btn">Call</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-9">
+            <div id="map"></div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="footer-logo font-weight-bold text-uppercase mt-3 mb-4">medify</h5>
+                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="footer-head font-weight-bold text-uppercase mt-3 mb-4">Company</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="footer-anchor" href="#!">About us</a>
+                        </li>
+                        <li>
+                            <a class="footer-anchor" href="#!">Contact us</a>
+                        </li>
+                        <li>
+                            <a class="footer-anchor" href="#!">News</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="footer-head font-weight-bold text-uppercase mt-3 mb-4">Profissionals</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="footer-anchor" href="#!">Join our team</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- Grid row -->
+        </div>
+        <!-- Footer Links -->
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-github"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+        <hr>
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a class="footer-anchor" href="#"> medify</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <!-- JS CDN -->
+    <script src="https://kit.fontawesome.com/2d2a841d14.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- SCRIPTS -->
+    <script src="js/styling.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

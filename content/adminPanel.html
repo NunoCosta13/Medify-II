@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/user.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="//db.onlinewebfonts.com/c/ef6bdf5ef216552c7e9869841e891ca0?family=Arial+Rounded+MT+Bold" rel="stylesheet" type="text/css" />
+    <title>Admin Panel</title>
+</head>
+
+<body>
+    <div class="text-center header">
+        <h1 class="logo">medify</h1>
+        <p class="slogan">Take care of you</p>
+    </div>
+    <div class="container">
+        <h4>Users Information</h4>
+        <div class="user-info">
+            <select id="users" onchange="showUser(this.value)">
+                    <!--USERS LIST-->
+            </select>
+            <div id="userSelectedInfo">
+                <!--USER INFO-->
+            </div>
+            <button class="btn" onclick="updateUserInfo(document.getElementById('users').value);">Update</button>
+            <button class="btn" onclick="deleteUser(document.getElementById('users').value);">Delete</button>
+        </div>
+
+        <h4>Doctor Information</h4>
+        <div class="doctor-info">
+            <select id="doctors" onchange="showDoctor(this.value)">
+                    <option value="Create New">Create New</option>
+                    <!--DOCTORS LIST-->
+                </select>
+            <form id="doctorInfoForm">
+                <input class="input-text" name="fname" type="text" placeholder="First Name">
+                <input class="input-text" name="lname" type="text" placeholder="Last Name">
+                <input class="input-text" name="specialty" type="text" placeholder="Specialty">
+                <input class="input-text" name="bio" type="text" placeholder="Biography" maxlength="210">
+                <input class="input-coord" name="lat" type="number" placeholder="Latitude">
+                <input class="input-coord" name="long" type="number" placeholder="Longitude">
+                <div class="custom-file input-img">
+                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                    <label class="custom-file-label" for="validatedCustomFile">Choose an image...</label>
+                </div>
+            </form>
+            <button class="btn" id="addDoctorBtt" onclick="addDoctor();">Create</button>
+            <button class="btn" id="updateDoctorBtt" onclick="updateDoctorInfo(document.getElementById('doctors').value);">Update</button>
+            <button class="btn" id="deleteDoctorBtt" onclick="deleteDoctor(document.getElementById('doctors').value);">Delete</button>
+        </div>
+
+    </div>
+
+
+
+    <button onclick="logout();">Logout</button>
+    <script src=" ../js/admin.js "></script>
+</body>
+
+</html>
