@@ -12,7 +12,7 @@ export default class usersController {
         for (let user of Object.keys(users)) {
             console.log(users[user].username);
             if (users[user].username == username) {
-                alert("found")
+
                 s = true;
                 break;
             }

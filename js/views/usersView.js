@@ -24,16 +24,31 @@ export default class usersView {
 
         let status = this.usersController.checkUser(username)
         if (!status) {
-            //SHOW ALERT
-            alert("not found")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'User not found!',
+                footer: '<a href="register.html">Do you have an account?</a>'
+            })
         } else {
             status = this.usersController.checkPassword(username, password)
             if (!status) {
-                //SHOW ALERT
-                alert("password wrong")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Wrong Password!',
+                    footer: '<a href="#">Forgot your password?</a>'
+                })
             } else {
                 sessionStorage.loggedUser = JSON.stringify(this.usersController.getUser(username))
-                alert("welcome")
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Hello ' + username + '!',
+                    timer: 2000
+                }).then(() => {
+                    location.href = "../index.html";
+                })
             }
         }
     }
@@ -78,23 +93,39 @@ export default class usersView {
         for (let item of Object.keys(items)) {
             if (items[item] == "") {
                 validate = false
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "Please fill all the fields!"
+                })
                 break;
             }
         }
 
         if (validate) {
             if (password != cpass) {
-                //ALERTS ERROR
-                alert("pw dif");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "Passwords don't match!"
+                })
             } else {
                 if (this.usersController.checkUsername(username))  {
-                    //ALERTS ERROR
-                    alert("alr ex");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Username already exists!'
+                    })
                 } else {
                     this.usersController.createUser(items);
-                    //ALERTS SUCCES
-                    alert("success!");
-                    location.href = "login.html";
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Welcome ' + username + " to Medify!",
+                        timer: 2000
+                    }).then(() => {
+                        location.href = "login.html";
+                    })
                 }
             }
         }
