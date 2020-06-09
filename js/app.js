@@ -7,8 +7,8 @@ import appointmentsView from './views/appointmentsView.js'
 
 class App {
     constructor() {
-        this.adminView = new adminView()
         this.usersView = new usersView()
+        this.adminView = new adminView()
         this.mapView = new mapView()
         this.appointmentsView = new appointmentsView()
     }

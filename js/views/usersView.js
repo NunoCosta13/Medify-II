@@ -9,6 +9,22 @@ export default class usersView {
         this.appointmentsController = new appointmentsController();
         this.gamificationController = new appointmentsController();
 
+        $(document).ready(() => {
+            if (sessionStorage.loggedUser) {
+                document.getElementById("dropdownMenuButton").innerHTML = JSON.parse(sessionStorage.loggedUser).username
+                document.getElementById("prfreg").innerHTML = "Profile"
+                document.getElementById("prfreg").href = "content/profile.html"
+                document.getElementById("loginout").innerHTML = "Logout"
+                document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear();")
+            } else {
+                document.getElementById("dropdownMenuButton").innerHTML = "Not Logged"
+                document.getElementById("prfreg").innerHTML = "Register"
+                document.getElementById("prfreg").href = "content/register.html"
+                document.getElementById("loginout").innerHTML = "Login"
+                document.getElementById("loginout").href = "content/login.html"
+            }
+        })
+
         $("#loginBtt").click(() => {
             this.login()
         })

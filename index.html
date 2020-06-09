@@ -41,7 +41,7 @@
     <div id="callDoctor" style="display: none;">
         <div class="container">
             <div class="row panel">
-                <div class="col-md-4 bg_blur ">
+                <div class="col-md-4 bg_blur">
                     <a href="#" id="callBtt" onclick="" class="follow_btn hidden-xs">Call</a>
                 </div>
                 <div class="col-md-8  col-xs-12 bgDoc">
@@ -76,11 +76,10 @@
             <span class="nav-slogan">Take care of you</span>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle profile-nav" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                  Username
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/content/profile.html">Profile</a>
-                    <a class="dropdown-item" onclick='document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";' href="/content/login.html">Logout</a>
+                <div id="dropdownElements" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a id="prfreg" class="dropdown-item" href="#"></a>
+                    <a id="loginout" class="dropdown-item" href="#"></a>
                 </div>
             </div>
         </div>
@@ -90,9 +89,16 @@
     <div class="row" style="margin-top: 60px;">
         <div class="col-3 form">
             <div class="form-group">
-                <h2>Little help?</h2>
+                <h2>Find a doctor</h2>
                 <div class="input-group mb-3">
                     <input type="text" id="input-dstny" class="form-control" placeholder="Name">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" id="input-dstny" class="form-control" placeholder="Distance (Km)">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Your Location"><i class="far fa-compass"></i></button>
                     </div>
