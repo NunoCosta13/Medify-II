@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\poo\\esmad-poo-1920"
+		},
+		{
+			"path": "..\\..\\poo\\myMusic"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "esmad-poo-1920"
+	}
+}
