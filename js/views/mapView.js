@@ -13,16 +13,78 @@ export default class mapView {
     }
 
     _initMap(userLocation) {
+        let myStyle = [{
+                "featureType": "administrative",
+                "elementType": "geometry",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "administrative.neighborhood",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "poi",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "road",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.icon",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "transit",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            }
+        ];
+
         //CREATES THE MAP
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14,
+            zoom: 15,
             center: { lat: parseFloat(userLocation.coords.latitude), lng: parseFloat(userLocation.coords.longitude) },
             zoomControl: true,
             mapTypeControl: false,
             scaleControl: true,
             streetViewControl: false,
             rotateControl: false,
-            fullscreenControl: false
+            fullscreenControl: false,
+            styles: myStyle
 
         })
 

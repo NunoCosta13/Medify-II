@@ -45,8 +45,8 @@
                   Username
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="profile.html">Profile</a>
-                    <a class="dropdown-item" onclick='document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";' href="/content/login.html">Logout</a>
+                    <a class="dropdown-item" id="prfreg" href="profile.html">Profile</a>
+                    <a class="dropdown-item" id="loginout" onclick='document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";' href="/content/login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -76,14 +76,14 @@
                                 <input type="email" id="emailInput" class="form-control input-email" placeholder="Email">
                                 <input type="text" id="phoneInput" class="form-control input-email" placeholder="Phone">
                                 <input type="text" id="addressInput" class="form-control input-email" placeholder="Address">
-                                <button onclick="hide();" class="btn btn-pass" id="btn-pass">Change Password</button>
+                                <input type="password" class="form-control current-pass" id="currPassword" placeholder="Current password">
+                                <button onclick='document.getElementById("password").style.display = "block"; document.getElementById("btn-pass").style.display = "none";' class="btn btn-pass" id="btn-pass">Change Password</button>
                                 <div class="password" id="password" style="display: none;">
-                                    <input type="password" class="form-control current-pass" id="currPassword" placeholder="Current password">
                                     <input type="password" class="form-control current-pass" id="newPassword" placeholder="New Password">
-                                    <input type="password" class="form-control current-pass" id="newPasswordC" placeholder="Confirm Password">
+                                    <input type="password" class="form-control current-pass" id="newPasswordC" placeholder="Confirm New Password">
                                 </div>
                                 <div class="row col-12 pass-btns">
-                                    <button class="btn btn btn-pass btn-pass-confirm" id="updateProfile" onclick="updateData();">Update</button>
+                                    <button class="btn btn btn-pass btn-pass-confirm" id="updateUser">Update</button>
                                 </div>
                             </div>
                             <div class="medical-report col-6">
@@ -305,7 +305,7 @@
             //TO RUN ON START AND CHECK IF USER IS LOGGED
             if (!sessionStorage.loggedUser) {
                 location.href = "login.html";
-            } else if (JSON.parse(sessionStorage.loggedUser().username) == "admin") {
+            } else if (JSON.parse(sessionStorage.loggedUser).username == "admin") {
                 location.href = "adminPanel.html";
             }
         </script>

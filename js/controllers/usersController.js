@@ -41,7 +41,7 @@ export default class usersController {
 
         for (let user of Object.keys(users)) {
             if (users[user].username == username) {
-                id = user;
+                id = users[user].id;
             }
         }
 
@@ -59,10 +59,18 @@ export default class usersController {
             }
         }
 
+        if (username == "admin") {
+            s = true
+        }
+
         return s;
     }
 
     createUser(items) {
         this.usersModel.create(items);
+    }
+
+    updateInfo(newInfo) {
+        this.usersModel.update(newInfo)
     }
 }

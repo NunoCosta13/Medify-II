@@ -4,20 +4,26 @@ export default class doctorsModel {
     }
 
     create(newDoctor) {
-        newDoctor.id = Object.keys(this.doctors).length;
+        let doctorsObjK = Object.keys(this.doctors)
 
-        this.doctors.push(newDoctor);
+        if (doctorsObjK.length == 0) {
+            newDoctor.id = 0
+        } else {
+
+            let lastid = doctorsObjK[doctorsObjK.length - 1]
+
+            newDoctor.id = parseInt(lastid) + 1
+        }
+
+
+
+
+        this.doctors[newDoctor.id] = newDoctor;
         this._persist();
     }
 
     remove(id) {
         delete this.doctors[id];
-
-        this._persist();
-    }
-
-    update(newInfo) {
-        this.doctors[newInfo.id] = newInfo
 
         this._persist();
     }
