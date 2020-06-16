@@ -10,7 +10,6 @@ export default class usersController {
 
         let s = false;
         for (let user of Object.keys(users)) {
-            console.log(users[user].username);
             if (users[user].username == username) {
 
                 s = true;

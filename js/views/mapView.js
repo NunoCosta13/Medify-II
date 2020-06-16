@@ -201,9 +201,8 @@ export default class mapView {
             </div>`
 
                                 let callDocBtts = document.getElementsByClassName("callDoc")
-                                console.log(callDocBtts)
+
                                 for (let btt of callDocBtts) {
-                                    console.log(btt)
                                     let id = btt.dataset.docid
 
                                     btt.addEventListener("click", () => {

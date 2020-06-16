@@ -1,6 +1,5 @@
 import usersView from './views/usersView.js'
 import mapView from './views/mapView.js'
-import appointmentsView from './views/appointmentsView.js'
 import adminView from './views/adminView.js'
 
 class App {
@@ -8,30 +7,26 @@ class App {
         var url = window.location.pathname
         var filename = url.substring(url.lastIndexOf('/') + 1)
 
-        if (filename == "" || "index.html") {
-            this.usersView = new usersView()
-            this.mapView = new mapView()
-        }
+
         if (filename == "login.html") {
             this.usersView = new usersView()
-        }
-        if (filename == "register.html") {
+        } else if (filename == "register.html") {
             this.usersView = new usersView()
-        }
-        if (filename == "profile.html") {
+        } else if (filename == "profile.html") {
             this.usersView = new usersView()
-            this.appointmentsView = new appointmentsView()
-        }
-        if (filename == "adminPanel.html") {
-            this.usersView = new usersView()
-            this.appointmentsView = new appointmentsView()
+        } else if (filename == "adminPanel.html") {
             this.adminView = new adminView()
-        }
-        if (filename == "about.html") {
+        } else if (filename == "about.html") {
             this.usersView = new usersView()
-        }
-        if (filename == "appointment.html") {
+        } else if (filename == "appointment.html") {
             this.usersView = new usersView()
+        } else if (filename == "" || "index.html") {
+            this.usersView = new usersView()
+            this.mapView = new mapView()
+        } else {
+            this.usersView = new usersView()
+            this.adminView = new adminView()
+            this.mapView = new mapView()
         }
     }
 }

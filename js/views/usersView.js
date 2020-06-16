@@ -60,7 +60,20 @@ export default class usersView {
                 document.getElementById("pillsInput").value = user.pills
 
                 //APPOINTMENTS TAB
-                //
+                if (user.appointments) {
+                    user = JSON.parse(sessionStorage.loggedUser)
+                    for (let appointment in Object.keys(user.appointments)) {
+                        let docId = user.appointments[appointment].docID
+                        let doctor = JSON.parse(localStorage.doctors)[docId]
+                        let newAppointment = document.createElement("a");
+
+                        newAppointment.classList.add("list-group-item", "list-group-item-action");
+                        newAppointment.href = "#";
+                        newAppointment.innerHTML = user.appointments[appointment].date + " - " + doctor.fname + " " + doctor.lname + " - " + user.appointments[appointment].feedback;
+
+                        document.getElementById("appointmentsList").appendChild(newAppointment);
+                    }
+                }
 
                 //ACHIEVEMENTS TAB
                 //
@@ -269,18 +282,39 @@ export default class usersView {
             let status = username != user.username ? this.usersController.checkUsername(username) : false;
 
             if (!status) {
-                let newInfo = {
-                    username: username,
-                    fname: fname,
-                    lname: lname,
-                    email: email,
-                    phone: phone,
-                    address: address,
-                    diseases: diseases,
-                    pills: pills,
-                    password: pw,
-                    id: user.id
+                let newInfo = {}
+                if (user.appointments) {
+                    newInfo = {
+                        username: username,
+                        fname: fname,
+                        lname: lname,
+                        email: email,
+                        phone: phone,
+                        address: address,
+                        diseases: diseases,
+                        pills: pills,
+                        password: pw,
+                        id: user.id,
+                        appointments: user.appointments
+                    }
+                } else {
+                    newInfo = {
+                        username: username,
+                        fname: fname,
+                        lname: lname,
+                        email: email,
+                        phone: phone,
+                        address: address,
+                        diseases: diseases,
+                        pills: pills,
+                        password: pw,
+                        id: user.id
+                    }
                 }
+
+
+
+
                 this.usersController.updateInfo(newInfo);
                 sessionStorage.loggedUser = JSON.stringify(this.usersController.getUser(username))
                 alert("success")
