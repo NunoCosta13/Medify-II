@@ -1,0 +1,27 @@
+.doctor_img {
+    max-width: 9% !important;
+    padding: 0px !important;
+    border-radius: 50%;
+}
+
+.logo_word {
+    color: rgb(215, 0, 0);
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+}
+
+.form {
+    margin-top: 60px;
+}
+
+.form-control {
+    width: 50% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.btn_feedback {
+    background-color: rgb(215, 0, 0) !important;
+    color: white !important;
+    margin-left: auto !important;
+    margin-top: 30px;
+}
