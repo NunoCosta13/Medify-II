@@ -13,33 +13,35 @@
 
 <body>
     <div class="container mt-5">
-        <div class="row  go_back">
+        <div class="row  go_back ml-3">
             <a href="#"><i class="fa fa-arrow-left mr-2 mt-1 arrow" aria-hidden="true"></i></a>
             <a class="go_back" href="#">
                 <p>Go Back</p>
             </a>
-
         </div>
-
-        <div class="text-center mb-5">
-            <img class="logo_img" src="img/logo.png" width="8%">
-            <h2 class="logo_word mt-2">medify</h2>
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <img class="doctor_img col-6" src="img/avatar.jpg">
-            <div class="doctor_name col-4 text-center mt-auto">
-                <h3>Dr.Name</h3>
-                <p>Profission</p>
+        <div class="container card">
+            <div class="text-center mb-5 logos">
+                <img class="logo_img" src="img/logo.png" width="90px">
+                <h2 class="logo_word mt-2">medify</h2>
             </div>
 
+            <div class="row">
+                <div class="col-7 text-center"><img class="doctor_img" src="img/avatar.jpg"></div>
 
+                <div class="doctor_name col-3 mt-auto">
+                    <h3>Dr.Name</h3>
+                    <p>Profission</p>
+                </div>
+
+
+            </div>
+            <div class="form text-center">
+                <p>Give us your feedback about your medical consultation:</p>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                <button type="button" class="btn btn_feedback">Send Feedback</button>
+            </div>
         </div>
-        <div class="form text-center">
-            <p>Give us your feedback about your medical consultation:</p>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-            <button type="button" class="btn btn_feedback">Send Feedback</button>
-        </div>
+
     </div>
     <!-- JS CDN -->
     <script src="https://kit.fontawesome.com/2d2a841d14.js" crossorigin="anonymous"></script>

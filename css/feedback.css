@@ -11,9 +11,17 @@
     color: rgb(215, 0, 0);
 }
 
+.card {
+    margin-bottom: 10px;
+}
+
+.logos {
+    margin-top: 20px;
+}
+
 .doctor_img {
-    max-width: 9% !important;
     padding: 0px !important;
+    width: 20%;
     border-radius: 50%;
 }
 
@@ -37,4 +45,11 @@
     color: white !important;
     margin-left: auto !important;
     margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width:575px) {
+    .doctor_img {
+        width: 100%;
+    }
 }
