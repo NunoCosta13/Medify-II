@@ -4,7 +4,16 @@ export default class usersModel {
     }
 
     create(newUser) {
-        newUser.id = Object.keys(this.users).length;
+        let usersObjK = Object.keys(this.users)
+
+        if (usersObjK.length == 0) {
+            newUser.id = 0
+        } else {
+
+            let lastid = usersObjK[usersObjK.length - 1]
+
+            newUser.id = parseInt(lastid) + 1
+        }
 
         this.users[newUser.id] = newUser;
         this._persist();

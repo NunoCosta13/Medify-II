@@ -161,7 +161,7 @@ export default class mapView {
                             icon: icon
                         });
 
-                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button onclick='openDoctor(" + '"' + currDoctor.fname + currDoctor.lname + '",' + '"' + marker.distance + '"' + ");'> Call </button></div>";
+                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button onclick='openDoctor(" + '"' + currDoctor.fname + currDoctor.lname + '",' + '"' + marker.distance + '"' + ");'> Call </button></div>";
                         google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
                             return function() {
                                 map.setZoom(16);

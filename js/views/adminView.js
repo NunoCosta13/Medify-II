@@ -102,16 +102,20 @@
               let lname = document.getElementById("dlname").value
               let specialty = document.getElementById("dspecialty").value
               let bio = document.getElementById("dbio").value
-              let photo = document.getElementById("dphoto").value
+              let picture = document.getElementById("dphoto").value
               let lat = document.getElementById("dlat").value
               let long = document.getElementById("dlong").value
+
+              let toChange = picture;
+              let toRemove = 'C:' + '\\' + 'fakepath' + '\\';
+              let picFN = toChange.replace(toRemove, "");
 
               let dInfo = {
                   fname: fname,
                   lname: lname,
                   specialty: specialty,
                   bio: bio,
-                  photo: photo,
+                  picture: picFN,
                   lat: lat,
                   long: long
               }
@@ -126,5 +130,27 @@
           $("#createUser").click(() => {
 
           })
+
+
+
+          for (let user in this.users) {
+              let usr = `<tr>
+                          <th scope="row">` + this.users[user].id + `</th>
+                          <td>` + this.users[user].fname + " " + this.users[user].lname + `</td>
+                          <td>` + this.users[user].username + `</td>
+                          <td>
+                              <button type="button" data-userid="` + this.users[user].id + `" class="userMoreBtt">
+                              <i class="fas fa-search"></i>
+                              </button>                                
+                          </td>
+                          <td>
+                              <button type="button" data-userid="` + this.users[user].id + `" class="userDelBtt">
+                              <i class="fas fa-ban"></i>
+                              </button>                                
+                          </td>
+                      </tr>`
+
+              document.getElementById("usersList").innerHTML += usr
+          }
       }
   }

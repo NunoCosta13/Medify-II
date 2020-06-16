@@ -9,11 +9,12 @@ export default class usersView {
         this.appointmentsController = new appointmentsController();
         this.gamificationController = new appointmentsController();
 
+        let user
         if (sessionStorage.loggedUser) {
             if (sessionStorage.loggedUser == "admin") {
-                let user = "admin"
+                user = "admin"
             } else {
-                let user = JSON.parse(sessionStorage.loggedUser)
+                user = JSON.parse(sessionStorage.loggedUser)
             }
         }
 
