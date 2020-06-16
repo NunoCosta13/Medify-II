@@ -90,27 +90,22 @@
             <div class="form-group">
                 <h2>Find a doctor</h2>
                 <div class="input-group mb-3">
-                    <input type="text" id="sDocName" class="form-control" placeholder="Name">
-                    <div class="input-group-append">
-                    </div>
+                    <input type="text" id="fdName" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <input type="text" id="sDist" class="form-control" placeholder="Distance (Km)">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Your Location"><i class="far fa-compass"></i></button>
-                    </div>
+                    <input type="text" id="fdDist" class="form-control" placeholder="Distance (Km)">
                 </div>
             </div>
-            <select class="custom-select form-control" id="sSpecialty"> 
+            <select class="custom-select form-control" id="fdSp"> 
                 <option value="" hidden>Choose by speciality</option>               
                 <option value="dentist">Dentist</option>
                 <option value="ortopedist">Ortopedist</option>
-                <option value="pediatric">Pediatric</option>                            
+                <option value="pediatrist">Pediatrist</option>                            
             </select>
             <div class="button-form mb-4">
-                <button class="btn-destiny">Search</button>
+                <button class="btn-destiny" id="filterDocs">Search</button>
             </div>
         </div>
         <div class="col-9">

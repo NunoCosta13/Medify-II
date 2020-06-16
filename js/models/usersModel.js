@@ -40,6 +40,10 @@ export default class usersModel {
         return user;
     }
 
+    savePer(usersObj) {
+        localStorage.users = JSON.stringify(usersObj);
+    }
+
     _persist() {
         localStorage.users = JSON.stringify(this.users);
     }

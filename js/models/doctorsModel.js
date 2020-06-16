@@ -36,6 +36,10 @@ export default class doctorsModel {
         return this.doctors[id] ? this.doctors[id] : {};
     }
 
+    savePer(doctorsObj) {
+        localStorage.doctors = JSON.stringify(doctorsObj);
+    }
+
     _persist() {
         localStorage.doctors = JSON.stringify(this.doctors);
     }

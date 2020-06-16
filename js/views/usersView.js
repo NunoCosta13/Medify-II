@@ -22,26 +22,30 @@ export default class usersView {
         var filename = url.substring(url.lastIndexOf('/') + 1)
 
         $(document).ready(() => {
-            if (sessionStorage.loggedUser) {
-                if (sessionStorage.loggedUser == "admin") {
-                    document.getElementById("dropdownMenuButton").innerHTML = "admin"
-                    document.getElementById("prfreg").innerHTML = "Admin Panel"
-                    document.getElementById("prfreg").href = "content/adminPanel.html"
-                    document.getElementById("loginout").innerHTML = "Logout"
-                    document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html'")
+            if (filename != "appointment.html") {
+
+
+                if (sessionStorage.loggedUser) {
+                    if (sessionStorage.loggedUser == "admin") {
+                        document.getElementById("dropdownMenuButton").innerHTML = "admin"
+                        document.getElementById("prfreg").innerHTML = "Admin Panel"
+                        document.getElementById("prfreg").href = "content/adminPanel.html"
+                        document.getElementById("loginout").innerHTML = "Logout"
+                        document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html'")
+                    } else {
+                        document.getElementById("dropdownMenuButton").innerHTML = JSON.parse(sessionStorage.loggedUser).username
+                        document.getElementById("prfreg").innerHTML = "Profile"
+                        document.getElementById("prfreg").href = "content/profile.html"
+                        document.getElementById("loginout").innerHTML = "Logout"
+                        document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html")
+                    }
                 } else {
-                    document.getElementById("dropdownMenuButton").innerHTML = JSON.parse(sessionStorage.loggedUser).username
-                    document.getElementById("prfreg").innerHTML = "Profile"
-                    document.getElementById("prfreg").href = "content/profile.html"
-                    document.getElementById("loginout").innerHTML = "Logout"
-                    document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html")
+                    document.getElementById("dropdownMenuButton").innerHTML = "Not Logged"
+                    document.getElementById("prfreg").innerHTML = "Register"
+                    document.getElementById("prfreg").href = "content/register.html"
+                    document.getElementById("loginout").innerHTML = "Login"
+                    document.getElementById("loginout").href = "content/login.html"
                 }
-            } else {
-                document.getElementById("dropdownMenuButton").innerHTML = "Not Logged"
-                document.getElementById("prfreg").innerHTML = "Register"
-                document.getElementById("prfreg").href = "content/register.html"
-                document.getElementById("loginout").innerHTML = "Login"
-                document.getElementById("loginout").href = "content/login.html"
             }
 
             if (filename == "profile.html") {
@@ -63,6 +67,32 @@ export default class usersView {
 
                 //WALLET TAB
                 //
+            } else if (filename == "appointment.html") {
+                this.docId = JSON.parse(sessionStorage.currAppointment).docId
+                this.doctor = JSON.parse(localStorage.doctors)[this.docId]
+
+                this.user = JSON.parse(sessionStorage.loggedUser)
+
+
+                document.getElementById("docPic").src = "/content/img/doctors/" + this.doctor.picture
+                document.getElementById("docName").innerHTML = this.doctor.fname + " " + this.doctor.lname
+                document.getElementById("docSp").innerHTML = this.doctor.specialty
+
+
+                document.getElementById("sendFeedback").addEventListener("click", () => {
+                    this.docFeedback = document.getElementById("docFeedback").value
+
+                    if (this.docFeedback != "") {
+                        this.appointmentsController.endAppointment(true, this.docFeedback)
+                    } else {
+                        this.appointmentsController.endAppointment(false)
+                    }
+                })
+
+                document.getElementById("endNoFeedback").addEventListener("click", () => {
+                    this.docFeedback = document.getElementById("docFeedback").value
+                    this.appointmentsController.endAppointment(false)
+                })
             }
         })
 

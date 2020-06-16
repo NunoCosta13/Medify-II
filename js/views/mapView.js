@@ -1,15 +1,20 @@
 import doctorsModel from '../models/doctorsModel.js'
+import appointmentsController from '../controllers/appointmentsController.js'
 
 export default class mapView {
     constructor() {
-        this.doctorsModel = new doctorsModel();
+        this.doctorsModel = new doctorsModel()
+        this.appointmentsController = new appointmentsController()
+        this.markers = []
 
-        $(document).ready(() => {
-            var page = location.href.split("/").slice(-1)
 
-            if (page == "" || "#")
-                this.loadMap()
+        var page = location.href.split("/").slice(-1)
+        if (page == "" || "#")
+            this.loadMap()
 
+
+        document.getElementById("filterDocs").addEventListener("click", () => {
+            this.filter(document.getElementById("fdName").value, document.getElementById("fdDist").value, document.getElementById("fdSp").value)
         })
     }
 
@@ -125,7 +130,8 @@ export default class mapView {
                 anchor: new google.maps.Point(16, 32)
             };
 
-            getTravelTime(currDoctor.lat, currDoctor.long);
+            getTravelTime(currDoctor.lat, currDoctor.long)
+
 
 
             //FUNCTION TO CALCULATE TRAVEL TIME
@@ -141,11 +147,9 @@ export default class mapView {
                     unitSystem: google.maps.UnitSystem.METRIC
                 };
 
-                service.getDistanceMatrix(matrixOptions, callback);
-
-                function callback(response, status) {
+                service.getDistanceMatrix(matrixOptions, function(response, status) {
                     if (status == 'OK') {
-                        let dist = response.rows[0].elements[0].distance.text;
+                        let dist = response.rows[0].elements[0].distance.text
                         let dur = response.rows[0].elements[0].duration.text
                         let final = [dist] + " - " + [dur];
 
@@ -164,10 +168,11 @@ export default class mapView {
                             icon: icon
                         });
 
-                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button id='vmBtt' onclick='" + '$("#modal").modal("show")' + "' data-docid='" + marker.docid + "'> View More </button></div>";
+                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button id='vmBtt' onclick='" + '$("#modal").modal("show")' + "' data-docid='" + marker.docid + "'> View More </button></div>"
+
                         google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
                             return function() {
-                                map.setZoom(16)
+                                map.setZoom(14)
                                 map.setCenter(marker.getPosition())
                                 infowindow.setContent(content)
                                 infowindow.open(map, marker)
@@ -190,20 +195,35 @@ export default class mapView {
                     </div>
                     <div class="modal-footer" id="footerModal">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="editDoc">Call</button>
+                        <button type="button" class="callDoc btn btn-primary" data-docid="` + marker.docid + `">Call</button>
                     </div>
                 </div>
             </div>`
+
+                                let callDocBtts = document.getElementsByClassName("callDoc")
+                                console.log(callDocBtts)
+                                for (let btt of callDocBtts) {
+                                    console.log(btt)
+                                    let id = btt.dataset.docid
+
+                                    btt.addEventListener("click", () => {
+                                        this.appointmentsController = new appointmentsController()
+                                        this.appointmentsController.startAppointment(id)
+                                    })
+                                }
                             };
                         })(marker, content, infowindow));
                     } else if (status !== "OK") {
                         alert("Error with distance matrix");
                     }
-                };
+                })
             };
         }
     }
 
+    addMarker(marker) {
+        this.markers.push(marker)
+    }
 
     loadMap() {
         if (navigator.geolocation) {
@@ -220,7 +240,25 @@ export default class mapView {
         }
     }
 
-    openDoc() {
-        alert("a")
+    callDoctor(id) {
+        alert(id)
+    }
+
+
+
+
+
+    filter(name, fDist, sp) {
+        //SHOWS DOCTORS IN THE MAP
+        let doctors = this.doctorsModel.getAll();
+        for (let doctor of Object.keys(doctors)) {
+            let currDoctor = doctors[doctor];
+
+            if (([currDoctor.name].includes(name)) || (name == "")) {
+                if ((currDoctor.specialty == sp) || (sp == "")) {
+                    alert("found")
+                }
+            }
+        }
     }
 }
