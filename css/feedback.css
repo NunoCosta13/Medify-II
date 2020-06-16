@@ -1,3 +1,16 @@
+.arrow {
+    color: rgb(64, 64, 64) !important;
+}
+
+.go_back {
+    color: rgb(64, 64, 64);
+}
+
+.go_back:hover {
+    text-decoration: none !important;
+    color: rgb(215, 0, 0);
+}
+
 .doctor_img {
     max-width: 9% !important;
     padding: 0px !important;
