@@ -35,4 +35,8 @@ export default class adminController {
     deleteDoctor(id) {
         this.doctorsModel.remove(id)
     }
+
+    deleteUser(id) {
+        this.usersModel.remove(id)
+    }
 }

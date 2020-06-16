@@ -152,5 +152,14 @@
 
               document.getElementById("usersList").innerHTML += usr
           }
+
+          let userDelBtts = document.getElementsByClassName("userDelBtt")
+          for (let btt of userDelBtts) {
+              let id = btt.dataset.userid
+              btt.addEventListener("click", () => {
+                  this.adminController.deleteUser(id)
+                  alert("removed")
+              })
+          }
       }
   }
