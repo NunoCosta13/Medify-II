@@ -76,7 +76,7 @@
                     </div>
                     <div class="modal-footer" id="footerModal">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary editar" id="editDoc">Edit</button>
+                        <button type="button" class="btn btn-primary editar" id="editDoc">Call</button>
                     </div>
                 </div>
             </div>`

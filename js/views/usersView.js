@@ -76,7 +76,7 @@ export default class usersView {
             this.register()
         })
 
-        $("#updateUser  ").click(() => {
+        $("#updateUser").click(() => {
             this.update()
         })
     }

@@ -9,6 +9,7 @@ export default class mapView {
 
             if (page == "" || "#")
                 this.loadMap()
+
         })
     }
 
@@ -152,22 +153,47 @@ export default class mapView {
                             map: map,
                             animation: google.maps.Animation.DROP,
                             position: { lat: parseFloat(currDoctor.lat), lng: parseFloat(currDoctor.long) },
+                            docid: currDoctor.id,
                             title: 'Dr. ' + currDoctor.fname + " " + currDoctor.lname,
                             specialty: currDoctor.specialty,
                             distance: [dist],
                             travelTime: final,
+                            bio: currDoctor.bio,
                             doctorName: "doctor" + currDoctor.fname + currDoctor.lname,
                             picture: currDoctor.picture,
                             icon: icon
                         });
 
-                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button onclick='openDoctor(" + '"' + currDoctor.fname + currDoctor.lname + '",' + '"' + marker.distance + '"' + ");'> Call </button></div>";
+                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button id='vmBtt' onclick='" + '$("#modal").modal("show")' + "' data-docid='" + marker.docid + "'> View More </button></div>";
                         google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
                             return function() {
-                                map.setZoom(16);
-                                map.setCenter(marker.getPosition());
-                                infowindow.setContent(content);
-                                infowindow.open(map, marker);
+                                map.setZoom(16)
+                                map.setCenter(marker.getPosition())
+                                infowindow.setContent(content)
+                                infowindow.open(map, marker)
+
+                                //SETS MODAL INFO
+                                document.getElementById("modal").innerHTML = `
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">` + marker.title + `</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <p><b>Name: </b>` + marker.title + `</p>
+                      <p><b>Specialty: </b>` + marker.specialty + `</p>
+                      <p><b>Distance: </b>` + marker.travelTime + `</p>
+                      <p><b>Distance: </b>` + marker.bio + `</p>
+                    </div>
+                    <div class="modal-footer" id="footerModal">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="editDoc">Call</button>
+                    </div>
+                </div>
+            </div>`
                             };
                         })(marker, content, infowindow));
                     } else if (status !== "OK") {
@@ -192,5 +218,9 @@ export default class mapView {
                 text: "Your browser does not support geolocation!",
             })
         }
+    }
+
+    openDoc() {
+        alert("a")
     }
 }
