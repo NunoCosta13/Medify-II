@@ -154,11 +154,58 @@
           }
 
           let userDelBtts = document.getElementsByClassName("userDelBtt")
+          let usersMoreBtts = document.getElementsByClassName("userMoreBtt")
+
           for (let btt of userDelBtts) {
               let id = btt.dataset.userid
               btt.addEventListener("click", () => {
                   this.adminController.deleteUser(id)
                   alert("removed")
+              })
+          }
+
+          for (let btt of usersMoreBtts) {
+              btt.addEventListener("click", () => {
+                  let id = btt.dataset.userid
+                  let user = this.users[id]
+
+
+                  document.getElementById("modal").innerHTML = `
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title">` + user.username + `</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <b>Name: </b>
+                    <input type="text" id="umfname" placeholder="` + user.fname + `"></input>
+                    <input type="text" id="umlname" placeholder="` + user.lname + `"></input><br>
+                    <b>Username: </b>
+                    <input type="text" id="umusername" placeholder="` + user.username + `"></p><br>
+                    <b>Password: </b>
+                    <input type="text" id="umpassword" placeholder="` + user.password + `"></p><br>
+                    <b>Email: </b>
+                    <input type="text" id="umemail" placeholder="` + user.email + `"></p><br>
+                    <b>Address: </b>
+                    <input type="text" id="umaddress" placeholder="` + user.address + `"></p><br>
+                    <b>Phone: </b>
+                    <input type="text" id="umphone" placeholder="` + user.phone + `"></p><br>
+                    <b>Diseases: </b>
+                    <input type="text" id="umdiseases" placeholder="` + user.diseases + `"></p><br>
+                    <b>Prescription Pills: </b>
+                    <input type="text" id="umpills" placeholder="` + user.pills + `"></p><br>
+                  </div>
+                  <div class="modal-footer" id="footerModal">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary editar" id="editDoc">Call</button>
+                  </div>
+              </div>
+          </div>`
+
+                  $("#modal").modal('show')
               })
           }
       }
