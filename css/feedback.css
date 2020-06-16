@@ -19,9 +19,13 @@
     margin-top: 20px;
 }
 
+.info {
+    text-align: center;
+}
+
 .doctor_img {
     padding: 0px !important;
-    width: 20%;
+    width: 100px;
     border-radius: 50%;
 }
 
@@ -31,7 +35,7 @@
 }
 
 .form {
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 .form-control {
@@ -46,10 +50,4 @@
     margin-left: auto !important;
     margin-top: 30px;
     margin-bottom: 10px;
-}
-
-@media screen and (max-width:575px) {
-    .doctor_img {
-        width: 100%;
-    }
 }
