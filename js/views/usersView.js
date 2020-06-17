@@ -1,13 +1,14 @@
 import usersController from '../controllers/usersController.js'
 import doctorsController from '../controllers/doctorsController.js'
 import appointmentsController from '../controllers/appointmentsController.js'
+import gamificationController from '../controllers/gamificationController.js'
 
 export default class usersView {
     constructor() {
         this.usersController = new usersController();
         this.doctorsController = new doctorsController();
         this.appointmentsController = new appointmentsController();
-        this.gamificationController = new appointmentsController();
+        this.gamificationController = new gamificationController();
 
         let user
         if (sessionStorage.loggedUser) {
@@ -282,8 +283,11 @@ export default class usersView {
             let status = username != user.username ? this.usersController.checkUsername(username) : false;
 
             if (!status) {
+                this.gamificationController.addBadge("updateProfile")
+                user = JSON.parse(sessionStorage.loggedUser)
+
                 let newInfo = {}
-                if (user.appointments) {
+                if (user.xp) {
                     newInfo = {
                         username: username,
                         fname: fname,
@@ -295,7 +299,9 @@ export default class usersView {
                         pills: pills,
                         password: pw,
                         id: user.id,
-                        appointments: user.appointments
+                        xp: user.xp,
+                        appointments: user.appointments,
+                        badges: user.badges
                     }
                 } else {
                     newInfo = {
@@ -308,7 +314,8 @@ export default class usersView {
                         diseases: diseases,
                         pills: pills,
                         password: pw,
-                        id: user.id
+                        id: user.id,
+                        badges: user.badges
                     }
                 }
 

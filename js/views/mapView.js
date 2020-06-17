@@ -91,7 +91,6 @@ export default class mapView {
             rotateControl: false,
             fullscreenControl: false,
             styles: myStyle
-
         })
 
         //SETS THE USER IN THE MAP --------------------
@@ -191,7 +190,7 @@ export default class mapView {
                       <p><b>Name: </b>` + marker.title + `</p>
                       <p><b>Specialty: </b>` + marker.specialty + `</p>
                       <p><b>Distance: </b>` + marker.travelTime + `</p>
-                      <p><b>Distance: </b>` + marker.bio + `</p>
+                      <p><b>Biography: </b>` + marker.bio + `</p>
                     </div>
                     <div class="modal-footer" id="footerModal">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -207,7 +206,7 @@ export default class mapView {
 
                                     btt.addEventListener("click", () => {
                                         this.appointmentsController = new appointmentsController()
-                                        this.appointmentsController.startAppointment(id)
+                                        this.appointmentsController.startAppointment(id, marker.distance)
                                     })
                                 }
                             };

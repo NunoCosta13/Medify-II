@@ -7,13 +7,13 @@ export default class appointmentsController {
         this.doctorsModel = new doctorsModel();
     }
 
-    startAppointment(docId) {
+    startAppointment(docId, dist) {
         if (sessionStorage.loggedUser) {
             var d = new Date();
             var n = d.toLocaleDateString();
 
             let userId = JSON.parse(sessionStorage.loggedUser).id
-            let appointmentInfo = { docId: docId, userId: userId, date: n }
+            let appointmentInfo = { docId: docId, userId: userId, date: n, distance: dist }
 
             sessionStorage.currAppointment = JSON.stringify(appointmentInfo)
             location.href = "/content/appointment.html"
