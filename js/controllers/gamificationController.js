@@ -4,7 +4,7 @@ export default class gamificationController {
     constructor() {
         this.gamificationModel = new gamificationModel()
         this.users = JSON.parse(localStorage.users)
-        this.user = JSON.parse(sessionStorage.loggedUser)
+        this.user = sessionStorage.loggedUser != "admin" ? JSON.parse(sessionStorage.loggedUser) : "admin"
     }
 
     addXP() {
