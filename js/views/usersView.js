@@ -63,24 +63,21 @@ export default class usersView {
                 //APPOINTMENTS TAB
                 if (user.appointments) {
                     user = JSON.parse(sessionStorage.loggedUser)
-                    for (let appointment in Object.keys(user.appointments)) {
-                        let docId = user.appointments[appointment].docID
-                        let doctor = JSON.parse(localStorage.doctors)[docId]
+                    for (let appointment in user.appointments) {
+                        let doctor = user.appointments[appointment].doctor
                         let newAppointment = document.createElement("a");
 
                         newAppointment.classList.add("list-group-item", "list-group-item-action");
                         newAppointment.href = "#";
-                        newAppointment.innerHTML = user.appointments[appointment].date + " - " + doctor.fname + " " + doctor.lname + " - " + user.appointments[appointment].feedback;
+                        if (user.appointments[appointment].feedback) {
+                            newAppointment.innerHTML = user.appointments[appointment].date + " - " + doctor.fname + " " + doctor.lname + " - " + user.appointments[appointment].feedback
+                        } else {
+                            newAppointment.innerHTML = user.appointments[appointment].date + " - " + doctor.fname + " " + doctor.lname
+                        }
 
-                        document.getElementById("appointmentsList").appendChild(newAppointment);
+                        document.getElementById("appointmentsList").appendChild(newAppointment)
                     }
                 }
-
-                //ACHIEVEMENTS TAB
-                //
-
-                //WALLET TAB
-                //
             } else if (filename == "appointment.html") {
                 this.docId = JSON.parse(sessionStorage.currAppointment).docId
                 this.doctor = JSON.parse(localStorage.doctors)[this.docId]
@@ -97,6 +94,7 @@ export default class usersView {
                     this.docFeedback = document.getElementById("docFeedback").value
 
                     if (this.docFeedback != "") {
+                        this.gamificationController.addXP(100)
                         this.appointmentsController.endAppointment(true, this.docFeedback)
                     } else {
                         this.appointmentsController.endAppointment(false)
@@ -104,7 +102,6 @@ export default class usersView {
                 })
 
                 document.getElementById("endNoFeedback").addEventListener("click", () => {
-                    this.docFeedback = document.getElementById("docFeedback").value
                     this.appointmentsController.endAppointment(false)
                 })
             }
@@ -287,6 +284,7 @@ export default class usersView {
                 user = JSON.parse(sessionStorage.loggedUser)
 
                 let newInfo = {}
+                let coins = user.coins ? user.coins : 0
                 if (user.xp) {
                     newInfo = {
                         username: username,
@@ -301,7 +299,8 @@ export default class usersView {
                         id: user.id,
                         xp: user.xp,
                         appointments: user.appointments,
-                        badges: user.badges
+                        badges: user.badges,
+                        coins: coins
                     }
                 } else {
                     newInfo = {

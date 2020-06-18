@@ -66,6 +66,7 @@ export default class usersController {
     }
 
     createUser(items) {
+        delete items.cpass
         this.usersModel.create(items);
     }
 

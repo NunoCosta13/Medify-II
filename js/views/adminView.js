@@ -60,28 +60,35 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <b>Name: </b>
-                      <input type="text" id="dmfname" placeholder="` + doctor.fname + `"></input>
-                      <input type="text" id="dmlname" placeholder="` + doctor.lname + `"></input><br>
+                      <b>ID: </b>
+                      <input readonly type="text" id="dmid" value="` + doctor.id + `" placeholder="` + doctor.id + `"></input><br>
+                      <b>Name: </b>
+                      <input type="text" id="dmfname" value="` + doctor.fname + `" placeholder="` + doctor.fname + `"></input>
+                      <input type="text" id="dmlname" value="` + doctor.lname + `" placeholder="` + doctor.lname + `"></input><br>
                       <b>Specialty: </b>
-                      <input type="text" id="dmspecialty" placeholder="` + doctor.specialty + `"></p><br>
+                      <input type="text" id="dmspecialty" value="` + doctor.specialty + `" placeholder="` + doctor.specialty + `"></p><br>
                       <b>Bio: </b>
-                      <input type="text" id="dmbio" placeholder="` + doctor.bio + `"></p><br>
-                      <p>Location: 
-                          <ul>
-                              <li><input type="text" id="dmlat" placeholder="` + doctor.lat + `"></p><br></li>
-                              <li><input type="text" id="dmlong" placeholder="` + doctor.long + `"></p><br></li>
-                          </ul>
-                      </p>
+                      <input type="text" id="dmbio" value="` + doctor.bio + `" placeholder="` + doctor.bio + `"></p><br>
+                      <b>Location: <b/>
+                      <ul>
+                            <li>Lat: <input type="text" value="` + doctor.lat + `" id="dmlat" placeholder="` + doctor.lat + `"></p></li>
+                            <li>Long: <input type="text" value="` + doctor.long + `" id="dmlong" placeholder="` + doctor.long + `"></p></li>
+                      </ul>
+                      <input type="file" data-oldpic="` + doctor.picture + `" id="dmpic" ">
                     </div>
                     <div class="modal-footer" id="footerModal">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary editar" id="editDoc">Call</button>
+                        <button type="button" class="btn btn-primary editar" id="editDoc">Edit</button>
                     </div>
                 </div>
             </div>`
 
                   $("#modal").modal('show')
+
+                  $("#editDoc").click(() => {
+                      alert("s")
+                      this.editDoc()
+                  })
               })
           }
 
@@ -122,15 +129,6 @@
 
               this.adminController.createDoctor(dInfo);
           })
-
-          $("#editDoc").click(() => {
-
-          })
-
-          $("#createUser").click(() => {
-
-          })
-
 
 
           for (let user in this.users) {
@@ -181,7 +179,7 @@
                   </div>
                   <div class="modal-body">
                       <b>Name: </b>
-                    <input type="text" id="umfname" placeholder="` + user.fname + `"></input>
+                    <input type="text" id="umfname" value=""placeholder="` + user.fname + `"></input>
                     <input type="text" id="umlname" placeholder="` + user.lname + `"></input><br>
                     <b>Username: </b>
                     <input type="text" id="umusername" placeholder="` + user.username + `"></p><br>
@@ -200,7 +198,7 @@
                   </div>
                   <div class="modal-footer" id="footerModal">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary editar" id="editDoc">Call</button>
+                      <button type="button" class="btn btn-primary editar" id="editUser">Call</button>
                   </div>
               </div>
           </div>`
@@ -208,5 +206,27 @@
                   $("#modal").modal('show')
               })
           }
+      }
+
+      editDoc() {
+          let id = document.getElementById("dmid").value
+          let fname = document.getElementById("dmfname").value
+          let lname = document.getElementById("dmlname").value
+          let bio = document.getElementById("dmbio").value
+          let sp = document.getElementById("dmspecialty").value
+          let lat = document.getElementById("dmlat").value
+          let long = document.getElementById("dmlong").value
+          let pic = document.getElementById("dmpic").value
+
+          if (pic != "") {
+              let toChange = pic;
+              let toRemove = 'C:' + '\\' + 'fakepath' + '\\';
+              let picFN = toChange.replace(toRemove, "");
+              pic = picFN
+          } else {
+              pic = document.getElementById("dmpic").dataset.oldpic
+          }
+
+          this.adminController.saveDoc(id, fname, lname, sp, bio, lat, long, pic)
       }
   }

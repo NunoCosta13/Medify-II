@@ -32,6 +32,41 @@ export default class adminController {
         }
     }
 
+    saveDoc(id, fname, lname, sp, bio, lat, long, pic) {
+        alert("a")
+        let doctors = JSON.parse(localStorage.doctors)
+        let doctor = doctors[id]
+
+        if (doctor.appointments) {
+            doctor = {
+                id: id,
+                fname: fname,
+                lname: lname,
+                bio: bio,
+                specialty: sp,
+                lat: lat,
+                long: long,
+                picture: pic,
+                appointments: doctor.appointments
+            }
+        } else {
+            doctor = {
+                id: id,
+                fname: fname,
+                lname: lname,
+                bio: bio,
+                specialty: sp,
+                lat: lat,
+                long: long,
+                picture: pic,
+            }
+        }
+
+        doctors[id] = doctor
+        this.doctorsModel.savePer(doctors)
+        alert("saved")
+    }
+
     deleteDoctor(id) {
         this.doctorsModel.remove(id)
     }

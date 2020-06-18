@@ -110,88 +110,11 @@
                     </div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-wallet-list">
                         <div class="achievementSep">
-                            <h1>35 <img src="../content/img/coin.png" style="height: 30px; width: auto;"></h1>
+                            <h1 id="coins"> <img src="../content/img/coin.png" style="height: 30px; width: auto; padding-right: 10px;"></h1>
+                            <input type="number" id="exXP" placeholder="XP Amount"><input type="number" id="exCoins" placeholder="Coins Amount" readonly>
+                            <button id="exchangeBtt">Exchange</button>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 50px;">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src="../content/img/pills.jpg" alt=""></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">5% Desconto</a>
-                                        </h4>
-                                        <h5>10 <img src="../content/img/coin.png" style="height: 15px; width: auto;"></h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                                    </div>
-                                    <div class="card-footer" style="text-align: center;">
-                                        <button class="btn btn-pass" id="btn-pass">Redeem</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 50px;">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src="../content/img/pills.jpg" alt=""></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">25% Desconto</a>
-                                        </h4>
-                                        <h5>30 <img src="../content/img/coin.png" style="height: 15px; width: auto;">
-                                        </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                                    </div>
-                                    <div class="card-footer" style="text-align: center;">
-                                        <button class="btn btn-pass" id="btn-pass">Redeem</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 50px;">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src="../content/img/doctors/docAppStore.jpg" alt=""></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">25% Desconto</a>
-                                        </h4>
-                                        <h5>50 <img src="../content/img/coin.png" style="height: 15px; width: auto;">
-                                        </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                                    </div>
-                                    <div class="card-footer" style="text-align: center;">
-                                        <button class="btn btn-pass" id="btn-pass">Redeem</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 50px;">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src="../content/img/doctors/docAppStore.jpg" alt=""></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">50% Desconto</a>
-                                        </h4>
-                                        <h5>100 <img src="../content/img/coin.png" style="height: 15px; width: auto;">
-                                        </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                                    </div>
-                                    <div class="card-footer" style="text-align: center;">
-                                        <button class="btn btn-pass" id="btn-pass">Redeem</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 50px;">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src="../content/img/doctors/docAppStore.jpg" alt=""></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">100% Desconto</a>
-                                        </h4>
-                                        <h5>150 <img src="../content/img/coin.png" style="height: 15px; width: auto;">
-                                        </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                                    </div>
-                                    <div class="card-footer" style="text-align: center;">
-                                        <button class="btn btn-pass" id="btn-pass">Redeem</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row" id="storeItems">
                         </div>
                     </div>
                 </div>

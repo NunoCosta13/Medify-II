@@ -1,10 +1,12 @@
 import usersModel from '../models/usersModel.js'
 import doctorsModel from '../models/doctorsModel.js'
+import gamificationController from '../controllers/gamificationController.js'
 
 export default class appointmentsController {
     constructor() {
-        this.usersModel = new usersModel();
-        this.doctorsModel = new doctorsModel();
+        this.usersModel = new usersModel()
+        this.doctorsModel = new doctorsModel()
+        this.gamificationController = new gamificationController()
     }
 
     startAppointment(docId, dist) {
@@ -23,6 +25,15 @@ export default class appointmentsController {
     }
 
     endAppointment(fbStatus, feedback = "") {
+        //GAMIFICATION HANDLER
+        this.gamificationController.addBadge("firstAppointment")
+        if (parseInt(JSON.parse(sessionStorage.currAppointment).distance) <= 20) {
+            this.gamificationController.addBadge("localSupport")
+        }
+
+        this.gamificationController.addXP(100)
+
+        //SAVE APPOINTMENT
         if (fbStatus == false) {
             let aptInfo = JSON.parse(sessionStorage.currAppointment)
 
@@ -35,40 +46,48 @@ export default class appointmentsController {
             if (user.appointments) {
                 let aptId = Object.keys(user.appointments).length
 
-                user.appointments[aptId] = { id: aptId, docID: aptInfo.docId, date: aptInfo.date }
+                user.appointments[aptId] = {
+                    id: aptId,
+                    doctor: {
+                        fname: doctor.fname,
+                        lname: doctor.lname,
+                        speciality: doctor.speciality,
+                        bio: doctor.bio
+                    },
+                    date: aptInfo.date
+                }
             } else {
                 user.appointments = {
                     0: {
                         id: 0,
-                        docID: aptInfo.docId,
+                        doctor: {
+                            fname: doctor.fname,
+                            lname: doctor.lname,
+                            speciality: doctor.speciality,
+                            bio: doctor.bio
+                        },
                         date: aptInfo.date
                     }
                 }
             }
-
-            if (doctor.appointments) {
-                let aptId = Object.keys(doctor.appointments).length
-
-                doctor.appointments[aptId] = { id: aptId, userID: aptInfo.userId, date: aptInfo.date }
-            } else {
-                doctor.appointments = {
-                    0: {
-                        id: 0,
-                        userID: aptInfo.userId,
-                        date: aptInfo.date
-                    }
-                }
-            }
-
 
             users[user.id] = user
-            doctors[doctor.id] = doctor
             sessionStorage.loggedUser = JSON.stringify(user)
             this.usersModel.savePer(users)
-            this.doctorsModel.savePer(doctors)
 
             alert("SAVED W/ NO FEEDBACK")
         } else {
+            //GAMIFICATION HANDLER
+            this.gamificationController.addBadge("firstAppointment")
+            this.gamificationController.addBadge("firstFeedback")
+            if (parseInt(JSON.parse(sessionStorage.currAppointment).distance) <= 20) {
+                this.gamificationController.addBadge("localSupport")
+            }
+
+            this.gamificationController.addXP(100)
+
+
+            //SAVE APPOINTMENT
             let aptInfo = JSON.parse(sessionStorage.currAppointment)
 
             let users = JSON.parse(localStorage.users)
@@ -80,39 +99,36 @@ export default class appointmentsController {
             if (user.appointments) {
                 let aptId = Object.keys(user.appointments).length
 
-                user.appointments[aptId] = { id: aptId, docID: aptInfo.docId, date: aptInfo.date, feedback: feedback }
+                user.appointments[aptId] = {
+                    id: aptId,
+                    doctor: {
+                        fname: doctor.fname,
+                        lname: doctor.lname,
+                        speciality: doctor.speciality,
+                        bio: doctor.bio
+                    },
+                    date: aptInfo.date,
+                    feedback: feedback
+                }
             } else {
                 user.appointments = {
                     0: {
                         id: 0,
-                        docID: aptInfo.docId,
+                        doctor: {
+                            fname: doctor.fname,
+                            lname: doctor.lname,
+                            speciality: doctor.speciality,
+                            bio: doctor.bio
+                        },
                         date: aptInfo.date,
                         feedback: feedback
                     }
                 }
             }
-
-            if (doctor.appointments) {
-                let aptId = Object.keys(doctor.appointments).length
-
-                doctor.appointments[aptId] = { id: aptId, userID: aptInfo.userId, date: aptInfo.date, feedback: feedback }
-            } else {
-                doctor.appointments = {
-                    0: {
-                        id: 0,
-                        userID: aptInfo.userId,
-                        date: aptInfo.date,
-                        feedback: feedback
-                    }
-                }
-            }
-
 
             users[user.id] = user
-            doctors[doctor.id] = doctor
             sessionStorage.loggedUser = JSON.stringify(user)
             this.usersModel.savePer(users)
-            this.doctorsModel.savePer(doctors)
 
             alert("SAVED W/ FEEDBACK")
         }
