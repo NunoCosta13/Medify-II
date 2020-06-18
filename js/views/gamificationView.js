@@ -47,7 +47,7 @@ export default class gamificationView {
                         <p class="card-text">` + this.gamificationController.storeItems[type][item].desc + `</p>
                     </div>
                     <div class="card-footer" style="text-align: center;">
-                        <button class="btn btn-pass redeemBtt" data-type="` + type + `" data-item:"` + name + `">Redeem</button>
+                        <button class="btn btn-pass redeemBtt" data-type="` + type + `" data-item="` + item + `">Redeem</button>
                      </div>
                     </div>
                 </div>`

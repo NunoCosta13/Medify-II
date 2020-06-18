@@ -86,9 +86,14 @@ export default class gamificationController {
 
     redeem(type, name) {
         if (this.user.coins) {
-            if (this.user.coins >= this.storeItems[type][name].price) {
+            if (Number(this.user.coins) >= Number(this.storeItems[type][name].price)) {
 
                 this.addXP(100)
+                this.user.coins = parseFloat(Number(this.user.coins) - Number(this.storeItems[type][name].price)).toFixed(2)
+                this.users[this.user.id] = this.user
+                localStorage.users = JSON.stringify(this.users)
+                sessionStorage.loggedUser = JSON.stringify(this.user)
+
                 alert("bought")
             } else {
                 alert("not enough coins")
