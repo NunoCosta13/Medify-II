@@ -48,3 +48,9 @@
     padding-right: 20px;
     width: 400px;
 }
+
+@media screen and (max-width:1210px) {
+    .header-text {
+        color: black;
+    }
+}

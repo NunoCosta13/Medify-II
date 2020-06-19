@@ -21,38 +21,41 @@ export default class mapView {
     _initMap(userLocation) {
         let myStyle = [{
                 "featureType": "administrative",
-                "elementType": "geometry",
+                "elementType": "geometry.stroke",
                 "stylers": [{
-                    "visibility": "off"
+                    "color": "#d70000"
                 }]
             },
             {
-                "featureType": "administrative.neighborhood",
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
                 "stylers": [{
-                    "visibility": "off"
+                    "color": "#444444"
+                }]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [{
+                    "color": "#f2f2f2"
                 }]
             },
             {
                 "featureType": "poi",
+                "elementType": "all",
                 "stylers": [{
                     "visibility": "off"
                 }]
             },
             {
-                "featureType": "poi",
-                "elementType": "labels.text",
+                "featureType": "poi.park",
+                "elementType": "all",
                 "stylers": [{
-                    "visibility": "off"
+                    "visibility": "simplified"
                 }]
             },
             {
-                "featureType": "road",
-                "stylers": [{
-                    "visibility": "off"
-                }]
-            },
-            {
-                "featureType": "road",
+                "featureType": "poi.park",
                 "elementType": "labels",
                 "stylers": [{
                     "visibility": "off"
@@ -60,6 +63,24 @@ export default class mapView {
             },
             {
                 "featureType": "road",
+                "elementType": "all",
+                "stylers": [{
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": 45
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [{
+                    "visibility": "simplified"
+                }]
+            },
+            {
+                "featureType": "road.arterial",
                 "elementType": "labels.icon",
                 "stylers": [{
                     "visibility": "off"
@@ -67,16 +88,21 @@ export default class mapView {
             },
             {
                 "featureType": "transit",
+                "elementType": "all",
                 "stylers": [{
                     "visibility": "off"
                 }]
             },
             {
                 "featureType": "water",
-                "elementType": "labels.text",
+                "elementType": "all",
                 "stylers": [{
-                    "visibility": "off"
-                }]
+                        "color": "#a4dff7"
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
             }
         ];
 
@@ -103,7 +129,7 @@ export default class mapView {
 
         let marker = new google.maps.Marker({
             map: map,
-            animation: google.maps.Animation.DROP,
+            animation: google.maps.Animation.BOUNCE,
             position: { lat: parseFloat(userLocation.coords.latitude), lng: parseFloat(userLocation.coords.longitude) },
             title: "Your Location",
             icon: icon
@@ -123,8 +149,8 @@ export default class mapView {
             let infowindow = new google.maps.InfoWindow();
 
             var icon = {
-                url: "../content/img/doctor.png",
-                scaledSize: new google.maps.Size(50, 50),
+                url: "../content/img/marker.png",
+                scaledSize: new google.maps.Size(35, 35),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(16, 32)
             };
