@@ -163,18 +163,13 @@ p {
     color: white !important;
     font-family: 'Montserrat', sans-serif;
     font-size: 15px !important;
-    margin-left: 40px !important;
-}
-
-.nav-slogan {
-    color: white;
 }
 
 .profile-nav {
     background-color: rgb(200, 0, 0);
-    margin-left: 15px;
     border: none;
-    margin-right: 30px;
+    color: white !important;
+    padding: 0px !important;
 }
 
 .profile-nav:focus {
