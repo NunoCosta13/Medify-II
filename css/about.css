@@ -45,12 +45,23 @@
 }
 
 .news-img {
-    padding-right: 20px;
     width: 400px;
 }
 
 @media screen and (max-width:1210px) {
     .header-text {
         color: black;
+    }
+}
+
+@media (min-width:900px) {
+    .news-img {
+        padding-right: 20px;
+    }
+    .video {
+        width: 500px;
+    }
+    .news {
+        margin-left: 50px;
     }
 }
