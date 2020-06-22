@@ -92,7 +92,6 @@
                       $("#modal").modal('show')
 
                       $("#editDoc").click(() => {
-                          alert("s")
                           this.editDoc()
                       })
                   })
@@ -166,7 +165,16 @@
                   let id = btt.dataset.userid
                   btt.addEventListener("click", () => {
                       this.adminController.deleteUser(id)
-                      alert("removed")
+
+                      Swal.fire({
+                          position: 'center',
+                          icon: 'success',
+                          title: 'User Deleted!',
+                          showConfirmButton: false,
+                          timer: 500
+                      }).then(() => {
+                          location.reload()
+                      })
                   })
               }
 

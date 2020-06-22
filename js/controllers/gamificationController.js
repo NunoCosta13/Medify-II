@@ -48,7 +48,14 @@ export default class gamificationController {
             this.user.xp = amount
         }
 
-        alert("+" + amount + " XP")
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'You received ' + amount + ' XP!',
+            showConfirmButton: false,
+            timer: 500
+        }).then(() => {})
+
         this.gamificationModel.save(this.user)
     }
 
@@ -69,8 +76,16 @@ export default class gamificationController {
                 this.user.badges.push(badgeName)
                 this.gamificationModel.save(this.user)
 
-                this.addXP(300)
-                alert("won " + badgeName)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'You received a new Badge!',
+                    imageUrl: '../content/img/badges/' + badgeName + 'Badge.png',
+                    imageHeight: 100,
+                    imageAlt: badgeName,
+                    showConfirmButton: false,
+                    timer: 500
+                }).then(() => { this.addXP(300) })
             }
 
 
@@ -79,8 +94,16 @@ export default class gamificationController {
             this.user.badges.push(badgeName)
             this.gamificationModel.save(this.user)
 
-            this.addXP(300)
-            alert("won " + badgeName)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'You received a new Badge!',
+                imageUrl: '../content/img/badges/' + badgeName + 'Badge.png',
+                imageHeight: 100,
+                imageAlt: badgeName,
+                showConfirmButton: false,
+                timer: 500
+            }).then(() => { this.addXP(300) })
         }
     }
 
@@ -94,12 +117,35 @@ export default class gamificationController {
                 localStorage.users = JSON.stringify(this.users)
                 sessionStorage.loggedUser = JSON.stringify(this.user)
 
-                alert("bought")
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'You redeemed a new product!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    location.reload()
+                })
             } else {
-                alert("not enough coins")
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Not enough coins!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         } else {
-            alert("not enough coins")
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Not enough coins!',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
 
@@ -111,7 +157,14 @@ export default class gamificationController {
 
         if (this.user.xp) {
             if (xpValue > userXP) {
-                alert("Not enough XP! You need " + (xpValue - userXP) + " XP.")
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Not enough xp! You need ' + (xpValue - userXP) + ' XP.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             } else {
                 this.user.xp -= xpValue
                 this.user.coins = this.user.coins ? parseFloat((Number(this.user.coins) + coinsValue)).toFixed(2) : coinsValue
@@ -122,11 +175,26 @@ export default class gamificationController {
                 localStorage.users = JSON.stringify(users)
                 sessionStorage.loggedUser = JSON.stringify(this.user)
 
-                alert("SUCCESS")
-                location.reload()
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Success.',
+                    text: 'Your XP was exchanged!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    location.reload()
+                })
             }
         } else {
-            alert("Not enough coins!")
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Not enough XP!',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
 }

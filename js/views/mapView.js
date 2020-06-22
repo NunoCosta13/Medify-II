@@ -246,7 +246,16 @@ export default class mapView {
                                     };
                                 })(marker, content, infowindow));
                             } else if (status !== "OK") {
-                                alert("Error with distance matrix");
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: 'An internal error ocurred!',
+                                    text: 'We are trying to fix it for you! Wait a moment...',
+                                    showConfirmButton: false,
+                                    timer: 500
+                                }).then(() => {
+                                    location.reload()
+                                })
                             }
 
                             //ADD MARKER TO STORAGE
@@ -527,7 +536,16 @@ export default class mapView {
                                             };
                                         })(marker, content, infowindow));
                                     } else if (status !== "OK") {
-                                        alert("Error with distance matrix");
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'error',
+                                            title: 'An internal error ocurred!',
+                                            text: 'We are trying to fix it for you! Wait a moment...',
+                                            showConfirmButton: false,
+                                            timer: 500
+                                        }).then(() => {
+                                            location.reload()
+                                        })
                                     }
 
                                     //ADD MARKER TO STORAGE

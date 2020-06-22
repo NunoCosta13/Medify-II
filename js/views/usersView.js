@@ -309,9 +309,24 @@ export default class usersView {
             let ncPassword = document.getElementById("newPasswordC").value
 
             if (password != user.password) {
-                alert("wrong password")
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Wrong Password.',
+                    showConfirmButton: false,
+                    timer: 500
+                })
+
             } else if (nPassword != ncPassword) {
-                alert("passwords dont match")
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text: "Password's don't match.",
+                    showConfirmButton: false,
+                    timer: 500
+                })
             } else {
                 let pw = nPassword == "" ? password : nPassword
                 let status = username != user.username ? this.usersController.checkUsername(username) : false;
@@ -360,9 +375,24 @@ export default class usersView {
 
                     this.usersController.updateInfo(newInfo);
                     sessionStorage.loggedUser = JSON.stringify(this.usersController.getUser(username))
-                    alert("success")
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'User updated.',
+                        timer: 1500
+                    }).then(() => {
+
+                    })
                 } else {
-                    alert("username not valid")
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'The chosen username is not valid.',
+                        showConfirmButton: false,
+                        timer: 500
+                    })
                 }
             }
         } catch (err) {}

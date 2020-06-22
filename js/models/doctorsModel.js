@@ -9,14 +9,20 @@ export default class doctorsModel {
         if (doctorsObjK.length == 0) {
             newDoctor.id = 0
         } else {
-
             let lastid = doctorsObjK[doctorsObjK.length - 1]
-
             newDoctor.id = parseInt(lastid) + 1
+            newDoctor.status = 0
         }
 
-
-
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Doctor created!',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            location.reload()
+        })
 
         this.doctors[newDoctor.id] = newDoctor;
         this._persist();
@@ -24,6 +30,16 @@ export default class doctorsModel {
 
     remove(id) {
         delete this.doctors[id];
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Doctor deleted!',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            location.reload()
+        })
 
         this._persist();
     }

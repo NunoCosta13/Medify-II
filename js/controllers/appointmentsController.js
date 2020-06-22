@@ -31,7 +31,15 @@ export default class appointmentsController {
             //REDIRECTS TO APPOINTMENT
             location.href = "/content/appointment.html"
         } else {
-            alert("plz login")
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please login!',
+                showConfirmButton: false,
+                timer: 500,
+                footer: '<a href="../content/login.html">Click here to Login</a>'
+            })
         }
     }
 
@@ -86,7 +94,17 @@ export default class appointmentsController {
             sessionStorage.loggedUser = JSON.stringify(user)
             this.usersModel.savePer(users)
 
-            alert("SAVED W/ NO FEEDBACK")
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your appointment was completed! No feedback was given!',
+                showConfirmButton: false,
+                timer: 3500
+            }).then(() => {
+                //REDIRECTS TO MAIN PAGE
+                location.href = "../index.html"
+            })
         } else {
             //GAMIFICATION HANDLER
             this.gamificationController.addBadge("firstAppointment")
@@ -141,7 +159,17 @@ export default class appointmentsController {
             sessionStorage.loggedUser = JSON.stringify(user)
             this.usersModel.savePer(users)
 
-            alert("SAVED W/ FEEDBACK")
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Thank you!',
+                text: 'Your appointment was completed! Thank you for your feedback',
+                showConfirmButton: false,
+                timer: 3500
+            }).then(() => {
+                //REDIRECTS TO MAIN PAGE
+                location.href = "../index.html"
+            })
         }
 
         let aptInfo = JSON.parse(sessionStorage.currAppointment)
@@ -154,8 +182,5 @@ export default class appointmentsController {
 
         //REMOVE
         sessionStorage.removeItem("currAppointment")
-
-        //REDIRECTS TO MAIN PAGE
-        location.href = "../index.html"
     }
 }

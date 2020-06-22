@@ -19,7 +19,13 @@ export default class adminController {
         let valid = false
         for (let data in dInfo) {
             if (dInfo[data] == "") {
-                alert("fields")
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Pleasem fill all the fields!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 valid = false
                 break
             }
@@ -33,7 +39,7 @@ export default class adminController {
     }
 
     saveDoc(id, fname, lname, sp, bio, lat, long, pic) {
-        alert("a")
+
         let doctors = JSON.parse(localStorage.doctors)
         let doctor = doctors[id]
 
@@ -62,9 +68,19 @@ export default class adminController {
             }
         }
 
+        doctor.status = 0
         doctors[id] = doctor
         this.doctorsModel.savePer(doctors)
-        alert("saved")
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Doctor saved!',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            location.reload()
+        })
     }
 
     deleteDoctor(id) {

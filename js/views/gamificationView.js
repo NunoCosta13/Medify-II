@@ -85,7 +85,15 @@ export default class gamificationView {
                 if (parseInt(document.getElementById("exXP").value) < 150) {
                     document.getElementById("exXP").value = 150
                     document.getElementById("exCoins").value = 1
-                    alert("Minimum of 150 XP")
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Minimum of 150 XP to be exchanged',
+                        showConfirmButton: false,
+                        timer: 500
+                    })
+
                 } else {
                     document.getElementById("exCoins").value = parseFloat(parseInt(document.getElementById("exXP").value) / 150).toFixed(2)
                 }
