@@ -36,12 +36,11 @@
                     <a class="nav-link" href="/content/about.html">About us</a>
                 </li>
             </ul>
-            <span class="nav-slogan">Take care of you</span>
+
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle profile-nav" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                  Username
+                <button class="btn dropdown-toggle profile-nav" type="button" id="dropdownMenuButton" data-toggle="dropdown">
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div id="dropdownElements" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a id="prfreg" class="dropdown-item" href="#"></a>
                     <a id="loginout" class="dropdown-item" href="#"></a>
                 </div>
@@ -54,12 +53,15 @@
         <div class="header-text">
             <h2>medify</h2>
             <h3>Your Health is one click away</h3>
-            <p class="">medify allows you to call a doctor to your home to have a more familiar consultation.</p>
+            <p>medify allows you to call a doctor to your home to have a more familiar consultation.</p>
             <p>Choose your destiny and call a doctor for a more peaceful life!</p>
-            <button type="button" class="btn btn-light">Make now a call</button>
+            <a href="../index.html">
+                <button type="button" class="btn btn-light">Make now a call</button>
+            </a>
+
         </div>
     </div>
-    <div class="news ml-3 ">
+    <div class="news ml-3" id="news">
         <h2>Latest News</h2>
         <div class="row ml-3">
             <a href="#" class="mb-3"><img src="../content/img/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.png" class="news-img"></a>
@@ -102,7 +104,7 @@
                             <a class="footer-anchor" href="#!">Contact us</a>
                         </li>
                         <li>
-                            <a class="footer-anchor" href="#!">News</a>
+                            <a class="footer-anchor" href="#news">News</a>
                         </li>
                     </ul>
 
@@ -134,12 +136,12 @@
         <!-- Social buttons -->
         <ul class="list-unstyled list-inline text-center">
             <li class="list-inline-item">
-                <a class="btn-floating btn-gplus mx-1">
+                <a href="https://www.youtube.com/watch?v=mO6nFn5ytVw&feature=youtu.be" class="btn-floating btn-gplus mx-1">
                     <i class="fab fa-youtube"></i>
                 </a>
             </li>
             <li class="list-inline-item">
-                <a class="btn-floating btn-li mx-1">
+                <a href="https://github.com/NunoCosta13/Medify-II" class="btn-floating btn-li mx-1">
                     <i class="fab fa-github"></i>
                 </a>
             </li>
@@ -148,7 +150,7 @@
         <hr>
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a class="footer-anchor" href="https://mdbootstrap.com/"> medify</a>
+            <a class="footer-anchor"> medify</a>
         </div>
         <!-- Copyright -->
 

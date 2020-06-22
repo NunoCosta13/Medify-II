@@ -12,13 +12,16 @@ export default class usersView {
         this.doctors = JSON.parse(localStorage.doctors)
 
         let user
-        if (sessionStorage.loggedUser) {
-            if (sessionStorage.loggedUser == "admin") {
-                user = "admin"
-            } else {
-                user = JSON.parse(sessionStorage.loggedUser)
+        try {
+            if (sessionStorage.loggedUser) {
+                if (sessionStorage.loggedUser == "admin") {
+                    user = "admin"
+                } else {
+                    user = JSON.parse(sessionStorage.loggedUser)
+                }
             }
-        }
+        } catch (err) {}
+
 
         var url = window.location.pathname
         var filename = url.substring(url.lastIndexOf('/') + 1)
