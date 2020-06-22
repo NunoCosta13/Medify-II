@@ -9,6 +9,7 @@ export default class usersView {
         this.doctorsController = new doctorsController();
         this.appointmentsController = new appointmentsController();
         this.gamificationController = new gamificationController();
+        this.doctors = JSON.parse(localStorage.doctors)
 
         let user
         if (sessionStorage.loggedUser) {
@@ -106,6 +107,13 @@ export default class usersView {
                 })
             }
         })
+
+        try {
+            for (let dc in this.doctors) {
+                document.getElementById("fdSp").innerHTML += `<option value="` + this.doctors[dc].specialty + `">` + this.doctors[dc].specialty + `</option>`
+            }
+        } catch (err) {}
+
 
 
 
