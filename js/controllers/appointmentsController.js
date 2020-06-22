@@ -9,6 +9,7 @@ export default class appointmentsController {
         this.gamificationController = new gamificationController()
     }
 
+    //FUNCTION TO START AN APPOINTMENT
     startAppointment(docId, dist) {
         if (sessionStorage.loggedUser) {
             //SETS THE DATE
@@ -31,6 +32,7 @@ export default class appointmentsController {
             //REDIRECTS TO APPOINTMENT
             location.href = "/content/appointment.html"
         } else {
+            //ALERTS ERROR
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -49,7 +51,6 @@ export default class appointmentsController {
         if (parseInt(JSON.parse(sessionStorage.currAppointment).distance) <= 20) {
             this.gamificationController.addBadge("localSupport")
         }
-
         this.gamificationController.addXP(100)
 
         //SAVE APPOINTMENT
@@ -62,6 +63,7 @@ export default class appointmentsController {
             let user = JSON.parse(sessionStorage.loggedUser)
             let doctor = doctors[aptInfo.docId]
 
+            //CREATES THE OBJECT
             if (user.appointments) {
                 let aptId = Object.keys(user.appointments).length
 
@@ -102,21 +104,22 @@ export default class appointmentsController {
                 showConfirmButton: false,
                 timer: 3500
             }).then(() => {
+
                 //REDIRECTS TO MAIN PAGE
                 location.href = "../index.html"
             })
         } else {
+
             //GAMIFICATION HANDLER
             this.gamificationController.addBadge("firstAppointment")
             this.gamificationController.addBadge("firstFeedback")
             if (parseInt(JSON.parse(sessionStorage.currAppointment).distance) <= 20) {
                 this.gamificationController.addBadge("localSupport")
             }
-
             this.gamificationController.addXP(100)
 
 
-            //SAVE APPOINTMENT
+            //SAVES APPOINTMENT
             let aptInfo = JSON.parse(sessionStorage.currAppointment)
 
             let users = JSON.parse(localStorage.users)
@@ -155,10 +158,12 @@ export default class appointmentsController {
                 }
             }
 
+            //SAVES TO LOCAL STORAGE
             users[user.id] = user
             sessionStorage.loggedUser = JSON.stringify(user)
             this.usersModel.savePer(users)
 
+            //ALERTS SUCCESS
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -172,15 +177,13 @@ export default class appointmentsController {
             })
         }
 
-        let aptInfo = JSON.parse(sessionStorage.currAppointment)
-
-
         //SETS DOCTOR AVAILABLE AGAIN
+        let aptInfo = JSON.parse(sessionStorage.currAppointment)
         let doctors = JSON.parse(localStorage.doctors)
         doctors[aptInfo.docId].status = 0
         localStorage.doctors = JSON.stringify(doctors)
 
-        //REMOVE
+        //REMOVES THE CURRENT APPOINTMENT INFO
         sessionStorage.removeItem("currAppointment")
     }
 }

@@ -3,6 +3,7 @@ export default class doctorsModel {
         this.doctors = localStorage.doctors ? JSON.parse(localStorage.doctors) : {};;
     }
 
+    //CREATES NEW DOCTOR
     create(newDoctor) {
         let doctorsObjK = Object.keys(this.doctors)
 
@@ -28,6 +29,7 @@ export default class doctorsModel {
         this._persist();
     }
 
+    //DELETES DOCTOR
     remove(id) {
         delete this.doctors[id];
 
@@ -44,18 +46,22 @@ export default class doctorsModel {
         this._persist();
     }
 
+    //GETS ALL DOCTORS
     getAll() {
         return this.doctors;
     }
 
+    //GETS A DOCTOR
     get(id) {
         return this.doctors[id] ? this.doctors[id] : {};
     }
 
+    //SAVES A NON-DEFAULT DOCTORS OBJECT - ex. SELF-CHANGED
     savePer(doctorsObj) {
         localStorage.doctors = JSON.stringify(doctorsObj);
     }
 
+    //SAVES TO LOCAL STORAGE
     _persist() {
         localStorage.doctors = JSON.stringify(this.doctors);
     }

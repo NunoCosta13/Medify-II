@@ -435,72 +435,73 @@ export default class mapView {
 
                     let currDoctor = doctors[doctor]
 
-                    if ((currDoctor.specialty == sp) || (sp == "")) {
+                    if (currDoctor.status == 0) {
+                        if ((currDoctor.specialty == sp) || (sp == "")) {
 
-                        let infowindow = new google.maps.InfoWindow();
+                            let infowindow = new google.maps.InfoWindow();
 
-                        var icon = {
-                            url: "../content/img/marker.png",
-                            scaledSize: new google.maps.Size(35, 35),
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(16, 32)
-                        };
-
-                        getTravelTime(currDoctor.lat, currDoctor.long)
-
-
-
-                        //FUNCTION TO CALCULATE TRAVEL TIME
-                        function getTravelTime(doctorLat, doctorLong) {
-                            let markers = []
-                            let doctorOri = [doctorLat] + "," + [doctorLong];
-                            let userDest = [userLocationLat] + "," + [userLocationLong];
-
-                            const service = new google.maps.DistanceMatrixService();
-                            const matrixOptions = {
-                                origins: [doctorOri],
-                                destinations: [userDest],
-                                travelMode: 'DRIVING',
-                                unitSystem: google.maps.UnitSystem.METRIC
+                            var icon = {
+                                url: "../content/img/marker.png",
+                                scaledSize: new google.maps.Size(35, 35),
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(16, 32)
                             };
 
-                            let marker
+                            getTravelTime(currDoctor.lat, currDoctor.long)
 
-                            service.getDistanceMatrix(matrixOptions, function(response, status) {
-                                if (status == 'OK') {
-                                    let dist = response.rows[0].elements[0].distance.text
-                                    let dur = response.rows[0].elements[0].duration.text
-                                    let final = [dist] + " - " + [dur];
 
-                                    let cDist = dist.replace("km", "")
 
-                                    if ((parseFloat(cDist) <= parseFloat(fDist)) || (fDist == "")) {
-                                        marker = new google.maps.Marker({
-                                            map: map,
-                                            animation: google.maps.Animation.DROP,
-                                            position: { lat: parseFloat(currDoctor.lat), lng: parseFloat(currDoctor.long) },
-                                            docid: currDoctor.id,
-                                            title: 'Dr. ' + currDoctor.fname + " " + currDoctor.lname,
-                                            specialty: currDoctor.specialty,
-                                            distance: [dist],
-                                            travelTime: final,
-                                            bio: currDoctor.bio,
-                                            doctorName: "doctor" + currDoctor.fname + currDoctor.lname,
-                                            picture: currDoctor.picture,
-                                            icon: icon
-                                        });
+                            //FUNCTION TO CALCULATE TRAVEL TIME
+                            function getTravelTime(doctorLat, doctorLong) {
+                                let markers = []
+                                let doctorOri = [doctorLat] + "," + [doctorLong];
+                                let userDest = [userLocationLat] + "," + [userLocationLong];
 
-                                        let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button id='vmBtt' onclick='" + '$("#modal").modal("show")' + "' data-docid='" + marker.docid + "'> View More </button></div>"
+                                const service = new google.maps.DistanceMatrixService();
+                                const matrixOptions = {
+                                    origins: [doctorOri],
+                                    destinations: [userDest],
+                                    travelMode: 'DRIVING',
+                                    unitSystem: google.maps.UnitSystem.METRIC
+                                };
 
-                                        google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
-                                            return function() {
-                                                map.setZoom(14)
-                                                map.setCenter(marker.getPosition())
-                                                infowindow.setContent(content)
-                                                infowindow.open(map, marker)
+                                let marker
 
-                                                //SETS MODAL INFO
-                                                document.getElementById("modal").innerHTML = `
+                                service.getDistanceMatrix(matrixOptions, function(response, status) {
+                                    if (status == 'OK') {
+                                        let dist = response.rows[0].elements[0].distance.text
+                                        let dur = response.rows[0].elements[0].duration.text
+                                        let final = [dist] + " - " + [dur];
+
+                                        let cDist = dist.replace("km", "")
+
+                                        if ((parseFloat(cDist) <= parseFloat(fDist)) || (fDist == "")) {
+                                            marker = new google.maps.Marker({
+                                                map: map,
+                                                animation: google.maps.Animation.DROP,
+                                                position: { lat: parseFloat(currDoctor.lat), lng: parseFloat(currDoctor.long) },
+                                                docid: currDoctor.id,
+                                                title: 'Dr. ' + currDoctor.fname + " " + currDoctor.lname,
+                                                specialty: currDoctor.specialty,
+                                                distance: [dist],
+                                                travelTime: final,
+                                                bio: currDoctor.bio,
+                                                doctorName: "doctor" + currDoctor.fname + currDoctor.lname,
+                                                picture: currDoctor.picture,
+                                                icon: icon
+                                            });
+
+                                            let content = "<div style='text-align: center'><h3>" + marker.title + "</h3><img style='height: 200px;' src='content/img/doctors/" + marker.picture + "'><h4 style='margin-top: 5px'>" + marker.specialty + "</h4><h6>" + marker.travelTime + "</h6><button id='vmBtt' onclick='" + '$("#modal").modal("show")' + "' data-docid='" + marker.docid + "'> View More </button></div>"
+
+                                            google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
+                                                return function() {
+                                                    map.setZoom(14)
+                                                    map.setCenter(marker.getPosition())
+                                                    infowindow.setContent(content)
+                                                    infowindow.open(map, marker)
+
+                                                    //SETS MODAL INFO
+                                                    document.getElementById("modal").innerHTML = `
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -522,43 +523,44 @@ export default class mapView {
                                                 </div>
                                             </div>`
 
-                                                let callDocBtts = document.getElementsByClassName("callDoc")
+                                                    let callDocBtts = document.getElementsByClassName("callDoc")
 
-                                                for (let btt of callDocBtts) {
-                                                    let id = btt.dataset.docid
+                                                    for (let btt of callDocBtts) {
+                                                        let id = btt.dataset.docid
 
-                                                    btt.addEventListener("click", () => {
-                                                        this.appointmentsController = new appointmentsController()
-                                                        this.appointmentsController.startAppointment(id, marker.distance)
-                                                    })
-                                                }
+                                                        btt.addEventListener("click", () => {
+                                                            this.appointmentsController = new appointmentsController()
+                                                            this.appointmentsController.startAppointment(id, marker.distance)
+                                                        })
+                                                    }
 
-                                            };
-                                        })(marker, content, infowindow));
-                                    } else if (status !== "OK") {
-                                        Swal.fire({
-                                            position: 'center',
-                                            icon: 'error',
-                                            title: 'An internal error ocurred!',
-                                            text: 'We are trying to fix it for you! Wait a moment...',
-                                            showConfirmButton: false,
-                                            timer: 500
-                                        }).then(() => {
-                                            location.reload()
+                                                };
+                                            })(marker, content, infowindow));
+                                        } else if (status !== "OK") {
+                                            Swal.fire({
+                                                position: 'center',
+                                                icon: 'error',
+                                                title: 'An internal error ocurred!',
+                                                text: 'We are trying to fix it for you! Wait a moment...',
+                                                showConfirmButton: false,
+                                                timer: 500
+                                            }).then(() => {
+                                                location.reload()
+                                            })
+                                        }
+
+                                        //ADD MARKER TO STORAGE
+                                        markers.push(marker)
+
+                                        document.getElementById("filterDocs").addEventListener("click", () => {
+
+                                            markers.forEach(currMarker => {
+                                                currMarker.setMap(null)
+                                            })
                                         })
                                     }
-
-                                    //ADD MARKER TO STORAGE
-                                    markers.push(marker)
-
-                                    document.getElementById("filterDocs").addEventListener("click", () => {
-
-                                        markers.forEach(currMarker => {
-                                            currMarker.setMap(null)
-                                        })
-                                    })
-                                }
-                            })
+                                })
+                            }
                         }
                     }
                 }

@@ -2,6 +2,8 @@ import gamificationModel from '../models/gamificationModel.js'
 
 export default class gamificationController {
     constructor() {
+
+        //SETS DEFAULT STORE ITEMS
         try {
             this.storeItems = {
                 appointmentsDiscount: {
@@ -41,27 +43,31 @@ export default class gamificationController {
         } catch (err) {}
     }
 
+    //FUNCTION TO ADD XP TO USER
     addXP(amount) {
+
+        //UPDATES XP
         if (this.user.xp) {
             this.user.xp += amount
         } else {
             this.user.xp = amount
         }
 
+        //ALERTS SUCCESS
         Swal.fire({
             position: 'top-end',
             icon: 'success',
             title: 'You received ' + amount + ' XP!',
             showConfirmButton: false,
             timer: 500
-        }).then(() => {})
-
-        this.gamificationModel.save(this.user)
+        }).then(() => { this.gamificationModel.save(this.user) })
     }
 
+    //FUNCTION TO ADD BADGE
     addBadge(badgeName) {
-        if (this.user.badges) {
 
+        //CHECKS IF USER ALREADY HAS THAT BADGE
+        if (this.user.badges) {
             let valid = false
             let userBadges = this.user.badges
 
@@ -107,6 +113,7 @@ export default class gamificationController {
         }
     }
 
+    //FUNCTION TO REDEEM ITEM FROM STORE
     redeem(type, name) {
         if (this.user.coins) {
             if (Number(this.user.coins) >= Number(this.storeItems[type][name].price)) {
@@ -149,6 +156,7 @@ export default class gamificationController {
         }
     }
 
+    //FUNCTION TO EXCHANGE XP TO COINS
     exchange(xpStr, coinsStr) {
         coinsStr = coinsStr.replace(",", ".")
         let coinsValue = Number(parseFloat(coinsStr).toFixed(2))

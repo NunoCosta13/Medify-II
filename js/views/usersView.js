@@ -10,10 +10,12 @@ export default class usersView {
         this.appointmentsController = new appointmentsController();
         this.gamificationController = new gamificationController();
 
+        //SETS DOCTORS VARIABLE
         try {
             this.doctors = JSON.parse(localStorage.doctors)
         } catch (err) {}
 
+        //IF AVAILABLE - SETS LOGGED USER INFO
         let user
         try {
             if (sessionStorage.loggedUser) {
@@ -25,7 +27,7 @@ export default class usersView {
             }
         } catch (err) {}
 
-
+        //SETS HTML ACCORDING TO EACH PAGE
         try {
             var url = window.location.pathname
             var filename = url.substring(url.lastIndexOf('/') + 1)
@@ -125,6 +127,7 @@ export default class usersView {
         } catch (err) {}
 
 
+        //SETS DOCTORS SPECIALTYS TO FILTER
         try {
             for (let dc in this.doctors) {
                 document.getElementById("fdSp").innerHTML += `<option value="` + this.doctors[dc].specialty + `">` + this.doctors[dc].specialty + `</option>`
@@ -132,19 +135,21 @@ export default class usersView {
         } catch (err) {}
 
 
-
+        //SETS LOGIN BTT
         try {
             $("#loginBtt").click(() => {
                 this.login()
             })
         } catch (err) {}
 
+        //SETS REGISTER BTT
         try {
             $("#registerBtt").click(() => {
                 this.register()
             })
         } catch (err) {}
 
+        //SETS UPDATE USER BTT
         try {
             $("#updateUser").click(() => {
                 this.update()
@@ -152,6 +157,8 @@ export default class usersView {
         } catch (err) {}
     }
 
+
+    //FUNCTION TO LOGIN USER
     login() {
         try {
             let username = document.getElementById("loginUsername").value
@@ -210,6 +217,8 @@ export default class usersView {
         } catch (err) {}
     }
 
+
+    //FUNCTION TO REGISTER USER
     register() {
         try {
 
@@ -291,6 +300,7 @@ export default class usersView {
         } catch (err) {}
     }
 
+    //FUNCTION TO UPDATE USER
     update() {
 
         try {

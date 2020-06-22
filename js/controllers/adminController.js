@@ -7,15 +7,20 @@ export default class adminController {
         this.doctorsModel = new doctorsModel();
     }
 
+    //FUNCTION TO GET ALL USERS
     getUsers() {
         return this.usersModel.getAll();
     }
 
+    //FUNCTION TO GET A SPECIFIC DOCTOR
     getDoctors() {
         return this.doctorsModel.getAll();
     }
 
+    //FUNCTION TO CREATE A DOCTOR
     createDoctor(dInfo) {
+
+        //VALIDATES DATA INPUTS
         let valid = false
         for (let data in dInfo) {
             if (dInfo[data] == "") {
@@ -33,11 +38,13 @@ export default class adminController {
             valid = true
         }
 
+        //IF VALID - CREATES
         if (valid == true) {
             this.doctorsModel.create(dInfo)
         }
     }
 
+    //FUNCTION TO UPDATE DOCTOR
     saveDoc(id, fname, lname, sp, bio, lat, long, pic) {
 
         let doctors = JSON.parse(localStorage.doctors)
@@ -83,10 +90,12 @@ export default class adminController {
         })
     }
 
+    //FUNCTION TO DELETE A DOCTOR
     deleteDoctor(id) {
         this.doctorsModel.remove(id)
     }
 
+    //FUNCTION TO DELETE A USER
     deleteUser(id) {
         this.usersModel.remove(id)
     }

@@ -5,26 +5,27 @@
 
   export default class adminView {
       constructor() {
-          this.usersController = new usersController();
-          this.doctorsController = new doctorsController();
-          this.appointmentsController = new appointmentsController();
-          this.adminController = new adminController();
+          this.usersController = new usersController()
+          this.doctorsController = new doctorsController()
+          this.appointmentsController = new appointmentsController()
+          this.adminController = new adminController()
 
+          //GETS MAIN VARS
           try {
               this.users = this.adminController.getUsers();
               this.doctors = this.adminController.getDoctors();
           } catch (err) {}
 
+          //SETS USERS/DOCTORS COUNTER
           try {
               document.getElementById("usersAm").innerHTML = Object.keys(this.users).length
               document.getElementById("docsAm").innerHTML = Object.keys(this.doctors).length
           } catch (err) {}
 
-
-
+          //LOADS DOCTOR INTO ADMIN PANEL
           try {
-              //LOAD DOCTORS INTO PANEL
               for (let doctor in this.doctors) {
+                  //SETS CARD
                   let doc = `<tr>
                             <th scope="row">` + this.doctors[doctor].id + `</th>
                             <td>` + this.doctors[doctor].fname + " " + this.doctors[doctor].lname + `</td>
@@ -44,12 +45,10 @@
                   document.getElementById("doctorsList").innerHTML += doc
               }
 
-
-
               let docsMoreBtt = document.getElementsByClassName("docMoreBtt")
               let docsDelBtt = document.getElementsByClassName("docDelBtt")
 
-
+              //SETS MODAL
               for (let btt of docsMoreBtt) {
                   btt.addEventListener("click", () => {
                       let id = btt.dataset.docid
@@ -97,7 +96,7 @@
                   })
               }
 
-
+              //SETS DELETE BUTTONS
               for (let btt of docsDelBtt) {
                   btt.addEventListener("click", () => {
                       let id = btt.dataset.docid
@@ -107,8 +106,9 @@
               }
           } catch (err) {}
 
-
+          //SETS EVENT LISTENER TO BUTTON
           try {
+              //CREATES A DOCTOR
               $("#createDoc").click(() => {
                   event.preventDefault();
 
@@ -137,7 +137,7 @@
                   this.adminController.createDoctor(dInfo);
               })
 
-
+              //SETS USERS CARDS
               for (let user in this.users) {
                   let usr = `<tr>
                           <th scope="row">` + this.users[user].id + `</th>
@@ -178,6 +178,7 @@
                   })
               }
 
+              //SETS USER INFO MODALS
               for (let btt of usersMoreBtts) {
                   btt.addEventListener("click", () => {
                       let id = btt.dataset.userid
@@ -226,10 +227,7 @@
       }
 
 
-
-
-
-
+      //EDIT DOC MODAL HANDLER
       editDoc() {
           try {
               let id = document.getElementById("dmid").value
