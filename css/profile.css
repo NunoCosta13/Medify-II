@@ -103,3 +103,9 @@
     padding: 40px 0 20px 0;
     border-bottom: 1px solid red;
 }
+
+@media(max-width:572px) {
+    .tab-content {
+        margin-top: 50px;
+    }
+}
