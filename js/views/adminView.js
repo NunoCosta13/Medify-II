@@ -10,17 +10,22 @@
           this.appointmentsController = new appointmentsController();
           this.adminController = new adminController();
 
-          this.users = this.adminController.getUsers();
-          this.doctors = this.adminController.getDoctors();
+          try {
+              this.users = this.adminController.getUsers();
+              this.doctors = this.adminController.getDoctors();
+          } catch (err) {}
 
-          document.getElementById("usersAm").innerHTML = Object.keys(this.users).length
-          document.getElementById("docsAm").innerHTML = Object.keys(this.doctors).length
+          try {
+              document.getElementById("usersAm").innerHTML = Object.keys(this.users).length
+              document.getElementById("docsAm").innerHTML = Object.keys(this.doctors).length
+          } catch (err) {}
 
 
 
-          //LOAD DOCTORS INTO PANEL
-          for (let doctor in this.doctors) {
-              let doc = `<tr>
+          try {
+              //LOAD DOCTORS INTO PANEL
+              for (let doctor in this.doctors) {
+                  let doc = `<tr>
                             <th scope="row">` + this.doctors[doctor].id + `</th>
                             <td>` + this.doctors[doctor].fname + " " + this.doctors[doctor].lname + `</td>
                             <td>` + this.doctors[doctor].specialty + `</td>
@@ -36,21 +41,22 @@
                             </td>
                         </tr>`
 
-              document.getElementById("doctorsList").innerHTML += doc
-          }
+                  document.getElementById("doctorsList").innerHTML += doc
+              }
 
 
-          let docsMoreBtt = document.getElementsByClassName("docMoreBtt")
-          let docsDelBtt = document.getElementsByClassName("docDelBtt")
+
+              let docsMoreBtt = document.getElementsByClassName("docMoreBtt")
+              let docsDelBtt = document.getElementsByClassName("docDelBtt")
 
 
-          for (let btt of docsMoreBtt) {
-              btt.addEventListener("click", () => {
-                  let id = btt.dataset.docid
-                  let doctor = this.doctors[id]
+              for (let btt of docsMoreBtt) {
+                  btt.addEventListener("click", () => {
+                      let id = btt.dataset.docid
+                      let doctor = this.doctors[id]
 
 
-                  document.getElementById("modal").innerHTML = `
+                      document.getElementById("modal").innerHTML = `
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -83,56 +89,58 @@
                 </div>
             </div>`
 
-                  $("#modal").modal('show')
+                      $("#modal").modal('show')
 
-                  $("#editDoc").click(() => {
-                      alert("s")
-                      this.editDoc()
+                      $("#editDoc").click(() => {
+                          alert("s")
+                          this.editDoc()
+                      })
                   })
-              })
-          }
-
-
-          for (let btt of docsDelBtt) {
-              btt.addEventListener("click", () => {
-                  let id = btt.dataset.docid
-
-                  this.adminController.deleteDoctor(id)
-              })
-          }
-
-
-          $("#createDoc").click(() => {
-              event.preventDefault();
-
-              let fname = document.getElementById("dfname").value
-              let lname = document.getElementById("dlname").value
-              let specialty = document.getElementById("dspecialty").value
-              let bio = document.getElementById("dbio").value
-              let picture = document.getElementById("dphoto").value
-              let lat = document.getElementById("dlat").value
-              let long = document.getElementById("dlong").value
-
-              let toChange = picture;
-              let toRemove = 'C:' + '\\' + 'fakepath' + '\\';
-              let picFN = toChange.replace(toRemove, "");
-
-              let dInfo = {
-                  fname: fname,
-                  lname: lname,
-                  specialty: specialty,
-                  bio: bio,
-                  picture: picFN,
-                  lat: lat,
-                  long: long
               }
 
-              this.adminController.createDoctor(dInfo);
-          })
+
+              for (let btt of docsDelBtt) {
+                  btt.addEventListener("click", () => {
+                      let id = btt.dataset.docid
+
+                      this.adminController.deleteDoctor(id)
+                  })
+              }
+          } catch (err) {}
 
 
-          for (let user in this.users) {
-              let usr = `<tr>
+          try {
+              $("#createDoc").click(() => {
+                  event.preventDefault();
+
+                  let fname = document.getElementById("dfname").value
+                  let lname = document.getElementById("dlname").value
+                  let specialty = document.getElementById("dspecialty").value
+                  let bio = document.getElementById("dbio").value
+                  let picture = document.getElementById("dphoto").value
+                  let lat = document.getElementById("dlat").value
+                  let long = document.getElementById("dlong").value
+
+                  let toChange = picture;
+                  let toRemove = 'C:' + '\\' + 'fakepath' + '\\';
+                  let picFN = toChange.replace(toRemove, "");
+
+                  let dInfo = {
+                      fname: fname,
+                      lname: lname,
+                      specialty: specialty,
+                      bio: bio,
+                      picture: picFN,
+                      lat: lat,
+                      long: long
+                  }
+
+                  this.adminController.createDoctor(dInfo);
+              })
+
+
+              for (let user in this.users) {
+                  let usr = `<tr>
                           <th scope="row">` + this.users[user].id + `</th>
                           <td>` + this.users[user].fname + " " + this.users[user].lname + `</td>
                           <td>` + this.users[user].username + `</td>
@@ -148,27 +156,27 @@
                           </td>
                       </tr>`
 
-              document.getElementById("usersList").innerHTML += usr
-          }
+                  document.getElementById("usersList").innerHTML += usr
+              }
 
-          let userDelBtts = document.getElementsByClassName("userDelBtt")
-          let usersMoreBtts = document.getElementsByClassName("userMoreBtt")
+              let userDelBtts = document.getElementsByClassName("userDelBtt")
+              let usersMoreBtts = document.getElementsByClassName("userMoreBtt")
 
-          for (let btt of userDelBtts) {
-              let id = btt.dataset.userid
-              btt.addEventListener("click", () => {
-                  this.adminController.deleteUser(id)
-                  alert("removed")
-              })
-          }
-
-          for (let btt of usersMoreBtts) {
-              btt.addEventListener("click", () => {
+              for (let btt of userDelBtts) {
                   let id = btt.dataset.userid
-                  let user = this.users[id]
+                  btt.addEventListener("click", () => {
+                      this.adminController.deleteUser(id)
+                      alert("removed")
+                  })
+              }
+
+              for (let btt of usersMoreBtts) {
+                  btt.addEventListener("click", () => {
+                      let id = btt.dataset.userid
+                      let user = this.users[id]
 
 
-                  document.getElementById("modal").innerHTML = `
+                      document.getElementById("modal").innerHTML = `
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -203,30 +211,38 @@
               </div>
           </div>`
 
-                  $("#modal").modal('show')
-              })
-          }
+                      $("#modal").modal('show')
+                  })
+              }
+          } catch (err) {}
       }
 
+
+
+
+
+
       editDoc() {
-          let id = document.getElementById("dmid").value
-          let fname = document.getElementById("dmfname").value
-          let lname = document.getElementById("dmlname").value
-          let bio = document.getElementById("dmbio").value
-          let sp = document.getElementById("dmspecialty").value
-          let lat = document.getElementById("dmlat").value
-          let long = document.getElementById("dmlong").value
-          let pic = document.getElementById("dmpic").value
+          try {
+              let id = document.getElementById("dmid").value
+              let fname = document.getElementById("dmfname").value
+              let lname = document.getElementById("dmlname").value
+              let bio = document.getElementById("dmbio").value
+              let sp = document.getElementById("dmspecialty").value
+              let lat = document.getElementById("dmlat").value
+              let long = document.getElementById("dmlong").value
+              let pic = document.getElementById("dmpic").value
 
-          if (pic != "") {
-              let toChange = pic;
-              let toRemove = 'C:' + '\\' + 'fakepath' + '\\';
-              let picFN = toChange.replace(toRemove, "");
-              pic = picFN
-          } else {
-              pic = document.getElementById("dmpic").dataset.oldpic
-          }
+              if (pic != "") {
+                  let toChange = pic;
+                  let toRemove = 'C:' + '\\' + 'fakepath' + '\\';
+                  let picFN = toChange.replace(toRemove, "");
+                  pic = picFN
+              } else {
+                  pic = document.getElementById("dmpic").dataset.oldpic
+              }
 
-          this.adminController.saveDoc(id, fname, lname, sp, bio, lat, long, pic)
+              this.adminController.saveDoc(id, fname, lname, sp, bio, lat, long, pic)
+          } catch (err) {}
       }
   }

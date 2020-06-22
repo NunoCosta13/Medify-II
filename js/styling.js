@@ -1,31 +1,3 @@
-//FUNCTION FOR LOADING ANIMATION
-loadingScreen();
-
-function loadingScreen() {
-
-    var preload = document.getElementById("loaderPage")
-    var loading = 0
-    var id = setInterval(frame, 64)
-    var loaded = false
-
-    function frame() {
-        if (loading == 100 && !loaded) {
-            clearInterval(id);
-            loaded = true
-            preload.remove();
-        } else {
-            loading = loading + 1
-            if (loading == 90) {
-                preload.style.animation = "fadeout 1s ease"
-            }
-        }
-    }
-};
-
-
-
-
-
 //FUNCTIONS TO HANDLE REGISTER ANIMATION
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets

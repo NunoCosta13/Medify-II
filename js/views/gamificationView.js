@@ -3,7 +3,9 @@ import gamificationController from '../controllers/gamificationController.js'
 export default class gamificationView {
     constructor() {
         this.gamificationController = new gamificationController()
-        this.user = JSON.parse(sessionStorage.loggedUser)
+        try {
+            this.user = JSON.parse(sessionStorage.loggedUser)
+        } catch (err) {}
 
 
         //XP
