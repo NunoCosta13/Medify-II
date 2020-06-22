@@ -36,13 +36,19 @@ export default class usersView {
                         document.getElementById("prfreg").innerHTML = "Admin Panel"
                         document.getElementById("prfreg").href = "content/adminPanel.html"
                         document.getElementById("loginout").innerHTML = "Logout"
-                        document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html'")
+                        document.getElementById("loginout").addEventListener("click", () => {
+                            sessionStorage.clear();
+                            location.href = '../content/login.html'
+                        })
                     } else {
                         document.getElementById("dropdownMenuButton").innerHTML = JSON.parse(sessionStorage.loggedUser).username
                         document.getElementById("prfreg").innerHTML = "Profile"
                         document.getElementById("prfreg").href = "../content/profile.html"
                         document.getElementById("loginout").innerHTML = "Logout"
-                        document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html")
+                        document.getElementById("loginout").addEventListener("click", () => {
+                            sessionStorage.clear();
+                            location.href = '../content/login.html'
+                        })
                     }
                 } else {
                     document.getElementById("dropdownMenuButton").innerHTML = "Not Logged"
