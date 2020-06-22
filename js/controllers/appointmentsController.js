@@ -11,13 +11,24 @@ export default class appointmentsController {
 
     startAppointment(docId, dist) {
         if (sessionStorage.loggedUser) {
+            //SETS THE DATE
             var d = new Date();
             var n = d.toLocaleDateString();
 
+            //SETS THE INFO TO SAVE
             let userId = JSON.parse(sessionStorage.loggedUser).id
             let appointmentInfo = { docId: docId, userId: userId, date: n, distance: dist }
 
+            //ADDS TO TEMPORARY APPOINTMENT
             sessionStorage.currAppointment = JSON.stringify(appointmentInfo)
+
+            //REMOVE DOCTOR FROM MAP
+            let doctors = JSON.parse(localStorage.doctors)
+            doctors[docId].status = 1
+            localStorage.doctors = JSON.stringify(doctors)
+
+
+            //REDIRECTS TO APPOINTMENT
             location.href = "/content/appointment.html"
         } else {
             alert("plz login")
@@ -133,6 +144,18 @@ export default class appointmentsController {
             alert("SAVED W/ FEEDBACK")
         }
 
+        let aptInfo = JSON.parse(sessionStorage.currAppointment)
+
+
+        //SETS DOCTOR AVAILABLE AGAIN
+        let doctors = JSON.parse(localStorage.doctors)
+        doctors[aptInfo.docId].status = 0
+        localStorage.doctors = JSON.stringify(doctors)
+
+        //REMOVE
+        sessionStorage.removeItem("currAppointment")
+
+        //REDIRECTS TO MAIN PAGE
         location.href = "../index.html"
     }
 }
