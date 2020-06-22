@@ -40,16 +40,16 @@ export default class usersView {
                     } else {
                         document.getElementById("dropdownMenuButton").innerHTML = JSON.parse(sessionStorage.loggedUser).username
                         document.getElementById("prfreg").innerHTML = "Profile"
-                        document.getElementById("prfreg").href = "content/profile.html"
+                        document.getElementById("prfreg").href = "../content/profile.html"
                         document.getElementById("loginout").innerHTML = "Logout"
                         document.getElementById("loginout").setAttribute("onclick", "sessionStorage.clear(); location.href='content/login.html")
                     }
                 } else {
                     document.getElementById("dropdownMenuButton").innerHTML = "Not Logged"
                     document.getElementById("prfreg").innerHTML = "Register"
-                    document.getElementById("prfreg").href = "content/register.html"
+                    document.getElementById("prfreg").href = "../content/register.html"
                     document.getElementById("loginout").innerHTML = "Login"
-                    document.getElementById("loginout").href = "content/login.html"
+                    document.getElementById("loginout").href = "../content/login.html"
                 }
             }
 
